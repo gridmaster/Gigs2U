@@ -49,7 +49,7 @@
 		echo "<p>Comment Posted! </p>";
 	}
 	?>
-	<form action="comment_frame.php?post_id=<?php echo $post_id; ?>" id="comment_iframe" name="postComment<?php echo $post_id; ?>" method="POST">
+	<form action="comment_frame.php?post_id=<?php echo $post_id; ?>" id="comment_form" name="postComment<?php echo $post_id; ?>" method="POST">
 		<textarea name="post_body" id="commentText" style='margin-right: 5px; border-radius: 3px;'></textarea>
 		<input type="submit" style='position: absolute; top: 14px;' name="postComment<?php echo $post_id; ?>" value="Comment">
 		<hr>
