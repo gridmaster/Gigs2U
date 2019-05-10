@@ -113,10 +113,10 @@ class Post {
 							if (!target.is("a")) {
 								var element = document.getElementById("toggleComment<?php echo $id; ?>");
 
-								if(element.style.display == "block")
+								if(element.style.display == "none")
 									element.style.display = "block";
 								else
-									element.style.display = "block";
+									element.style.display = "none";
 							}
 						}
 
@@ -207,7 +207,7 @@ class Post {
 
 								<div class='newsfeedPostOptions'>
 									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-<!--									<iframe src='like.php?post_id=$id' scrolling='no'></iframe> -->
+									<iframe src='like.php?post_id=$id' scrolling='no'></iframe> 
 								</div>
 
 							</div>

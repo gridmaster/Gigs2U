@@ -58,6 +58,7 @@
 
 		//Insert Notification
 	}
+	
 	//Unlike button
 	if(isset($_POST['unlike_button'])) {
 		$total_likes--;
