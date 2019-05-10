@@ -1,4 +1,20 @@
-<html>
+<?php
+	require 'config/config.php';
+	include("includes/classes/User.php");
+	include("includes/classes/Post.php");
+
+	if (isset($_SESSION['username'])) {
+		$userLoggedIn = $_SESSION['username'];
+		$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
+		$user = mysqli_fetch_array($user_details_query);
+	}
+	else {
+		header("Location: register.php");
+	}
+
+?>
+
+	<html>
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -13,24 +29,7 @@
 
 	</style>
 
-	<?php  
-	require 'config/config.php';
-	include("includes/classes/User.php");
-	include("includes/classes/Post.php");
-
-	if (isset($_SESSION['username'])) {
-		$userLoggedIn = $_SESSION['username'];
-		$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
-		$user = mysqli_fetch_array($user_details_query);
-	}
-	else {
-		header("Location: register.php");
-	}
-
-	?>
-
-
-	<?php  
+	<?php
 	//Get id of post
 	if(isset($_GET['post_id'])) {
 		$post_id = $_GET['post_id'];
@@ -56,7 +55,7 @@
 	</form>
 
 	<!-- Load comments -->
-	<?php  
+	<?php
 	$get_comments = mysqli_query($con, "SELECT * FROM comments WHERE post_id='$post_id' ORDER BY id ASC");
 	$count = mysqli_num_rows($get_comments);
 
@@ -74,11 +73,11 @@
 			$date_time_now = date("Y-m-d H:i:s");
 			$start_date = new DateTime($date_added); //Time of post
 			$end_date = new DateTime($date_time_now); //Current time
-			$interval = $start_date->diff($end_date); //Difference between dates 
+			$interval = $start_date->diff($end_date); //Difference between dates
 			if($interval->y >= 1) {
 				if($interval == 1)
 					$time_message = $interval->y . " year ago"; //1 year ago
-				else 
+				else
 					$time_message = $interval->y . " years ago"; //1+ year ago
 			}
 			else if ($interval->m >= 1) {
@@ -140,7 +139,7 @@
 			<div class="comment_section">
 				<a href="<?php echo $posted_by?>" target="_parent"><img src="<?php echo $user_obj->getProfilePic();?>" title="<?php echo $posted_by; ?>" style="float:left;" height="30"></a>
 				<a href="<?php echo $posted_by?>" target="_parent"> <b> <?php echo $user_obj->getFirstAndLastName(); ?> </b></a>
-				&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $time_message . "<br>" . $comment_body; ?> 
+				&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $time_message . "<br>" . $comment_body; ?>
 				<hr>
 			</div>
 			<?php
@@ -152,11 +151,6 @@
 	}
 
 	?>
-
-
-
-
-
 
 </body>
 </html>

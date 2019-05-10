@@ -160,6 +160,7 @@ textarea:focus {
 .comment_iframe {
     max-height: 250px;
     width: 100%;
+		margin-top: 5px;
 }
 
 .comment_section {
@@ -199,4 +200,11 @@ textarea:focus {
 .submit_comment {
     position: absolute;
     top: 44;
+}
+
+.newsfeedPostOptions {
+		padding: px;
+		text-decoration: none;
+		color: #28AAE5;
+		border: none;
 }
