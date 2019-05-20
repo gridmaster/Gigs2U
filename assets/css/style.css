@@ -12,6 +12,11 @@ body {
 	background-color: #E6EAE8;
 }
 
+a {
+	color: #20AAE5;
+	text-decoration: none;
+}
+
 .top_bar {
 	width: 100%;
 	min-width: 1050px;
@@ -25,13 +30,7 @@ body {
 }
 
 .logo a{
-	font-family: 'Bellota-BoldItalic', sans-serif;
-	margin-left: 10px;
-	font-size: 30;
 	position: relative;
-	top: 9px;
-	text-shadow: #73B6E2 0.5px 0.5px 0px;
-	color: #1086BA;
 }
 
 a:hover {
@@ -125,7 +124,7 @@ textarea:focus {
 	border-radius: 3px;
 	background-color: #3498db;
 	font-family: 'Bellota-BoldItalic', sans-serif;
-	color: #0c4d8c;
+	color: #1E75CA;
 	text-shadow: #73B6E2 0.5px 0.5px 0px;
 	font-size: 90%;
 	position: absolute;
@@ -142,6 +141,7 @@ textarea:focus {
 	font-size: 15px;
 	padding: 0px 5px;
 	min-height: 75px;
+	cursor:pointer;
 }
 
 .post_profile_pic {
@@ -153,31 +153,23 @@ textarea:focus {
 	border-radius: 5px;
 }
 
-.post_body {
-        margin-right: 5px;
-}
-
-.comment_iframe {
-    max-height: 250px;
-    width: 100%;
-		margin-top: 5px;
+#comment_iframe {
+	max-height: 250px;	
+	width: 100%;
+	margin-top: 5px;
 }
 
 .comment_section {
-    padding: 5px 5px 5px;
+	padding: 0 5px 5px 5px;
 }
 
 .comment_section img {
-    margin: 0 3px 3px 3px;
-    border-radius: 3px;
-}
-
-.commentText {
-    margin-right: 5px;
-    border-radius: 3px;
+	margin: 0 3px 3px 3px;
+	border-radius: 3px;
 }
 
 #comment_form textarea {
+	border-color: #D3D3D3;
 	width: 85%;
 	height: 35px;
 	border-radius: 5px;
@@ -185,9 +177,8 @@ textarea:focus {
 	font-size: 14px;
 	margin: 3px 3px 3px 5px;
 }
-
 #comment_form input[type="submit"] {
-	border: none;
+	border:none;
 	background-color: #20AAE5;
 	color: #156588;
 	border-radius: 5px;
@@ -195,27 +186,24 @@ textarea:focus {
 	height: 35px;
 	margin-top: 3px;
 	position: absolute;
-}
-
-.submit_comment {
-    position: absolute;
-    top: 44;
+	font-family: 'Bellota-BoldItalic', sans-serif;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
 }
 
 .newsfeedPostOptions {
 	padding: 0px;
 	text-decoration: none;
-	color: #28AAE5;
-	border: none;
+	color:#20AAE5;
+	border:none;
 }
 
-.newsfeedPostOptions iframe{
+.newsfeedPostOptions iframe {
 	border: 0px;
 	height: 17px;
 	width: 120px;
 }
 
-.comment_like  {
+.comment_like {
 	background-color: transparent;
 	border: none;
 	font-size: 14px;
@@ -224,17 +212,16 @@ textarea:focus {
 	height: auto;
 	width: auto;
 	margin: 0;
-    padding-top: 4px;
 }
 
 .like_value {
 	display: inline;
-	font-size: 14;
+	font-size: 14px;
 }
 
 .profile_left {
 	top: -10px;
-	width: 17px;
+	width: 17%;
 	max-width: 240px;
 	min-width: 130px;
 	height: 100%;
@@ -250,13 +237,13 @@ textarea:focus {
 	min-width: 80px;
 	width: 55%;
 	margin: 20px;
-	border: 5px solid #83D6EF;
+	border: 5px solid #83D6FE;
 	border-radius: 100px;
 }
 
 .profile_info {
 	display: list-item;
-	background-color: #2988b9;
+	background-color: #2980b9;
 	width: 100%;
 	padding: 10px 0 10px 0;
 }
@@ -269,25 +256,20 @@ textarea:focus {
 .danger {
 	background-color: #e74c3c;
 }
-
 .warning {
 	background-color: #f0ad4e;
 }
-
 .default {
 	background-color: #bdc3c7;
 }
-
 .success {
 	background-color: #2ecc71;
 }
-
 .info {
 	background-color: #3498db;
 }
-
 .deep_blue {
-	background-color: #004ef0;
+	background-color: #0043f0;
 }
 
 .profile_left input[type="submit"] {
@@ -298,3 +280,48 @@ textarea:focus {
 	border: none;
 	color: #fff;
 }
+
+#accept_button {
+	width: 20%;
+	height: 28px;
+	border-radius: 5px;
+	margin: 5px;
+	border: none;
+	color: #fff;
+	background-color: #2ecc71;
+}
+#ignore_button {
+	width: 20%;
+	height: 28px;
+	border-radius: 5px;
+	margin: 5px;
+	border: none;
+	color: #fff;
+	background-color: #e74c3c;
+}
+
+.delete_button {
+	height: 22px;
+	width: 22px;
+	padding: 0;
+	float: right;
+	border-radius: 4px;
+	right: -15px;
+	position: relative;
+}
+
+.profile_main_column {
+	min-width: 675px;
+	float: left;
+	width: 70%;
+	z-index: -1;
+
+}
+
+.profile_info_bottom {
+	margin: 10 0 0 7px;
+
+}
+
+
+

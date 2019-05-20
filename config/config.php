@@ -1,15 +1,14 @@
 <?php
-
-ob_start(); // turns on output buffering
+ob_start(); //Turns on output buffering 
 session_start();
 
-$timezone = date_default_timezone_set("America/New_York");
+$timezone = date_default_timezone_set("Europe/London");
 
-$con = mysqli_connect("localhost", "root", "", "social");
+$con = mysqli_connect("localhost", "root", "", "gigs2u"); //Connection variable
 
-if(mysqli_connect_error())
+if(mysqli_connect_errno()) 
 {
-  echo "Failed to connect: " . mysqli_connect_error();
+	echo "Failed to connect: " . mysqli_connect_errno();
 }
 
 ?>

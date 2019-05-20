@@ -1,5 +1,7 @@
 <?php  
 require 'config/config.php';
+include("includes/classes/User.php");
+include("includes/classes/Post.php");
 
 
 if (isset($_SESSION['username'])) {
@@ -15,24 +17,30 @@ else {
 
 <html>
 <head>
-    <title>Welcome to Gigs2U</title>
+	<title>Gigs2u - Helping Bands & Fans!</title>
+	<link rel="shortcut icon" href="assets//images/icons/favicon-32x32.png">
 
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/bootbox.min.js"></script>
+	<script src="assets/js/gigs2u.js"></script>
+	<script src="assets/js/jquery.Jcrop.js"></script>
+	<script src="assets/js/jcrop_bits.js"></script>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+	<link rel="stylesheet" href="assets/css/jquery.Jcrop.css" type="text/css" />
+	
 </head>
 <body>
 
 	<div class="top_bar"> 
 
 		<div class="logo">
-			<img src="assets/images/logos/GIGS2U_Logo_Banner_2.jpeg" alt="Gigs2U" />
+			<a href="index.php"><img src="assets/images/logos/GIGS2U_Logo_Banner_2.jpeg" alt="Gigs2U" /></a>
 		</div>
 
 		<nav>
@@ -48,10 +56,10 @@ else {
 			<a href="#">
 				<i class="fa fa-bell fa-lg"></i>
 			</a>
-			<a href="#">
+			<a href="requests.php">
 				<i class="fa fa-users fa-lg"></i>
 			</a>
-			<a href="#">
+			<a href="upload.php">
 				<i class="fa fa-cog fa-lg"></i>
 			</a>
 			<a href="includes/handlers/logout.php">
