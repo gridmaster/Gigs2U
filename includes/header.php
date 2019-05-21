@@ -58,7 +58,7 @@ else {
 			</a>
 			<a href="requests.php">
 				<i class="fa fa-users fa-lg"></i>
-			</a>
+			</a>			
 			<a href="upload.php">
 				<i class="fa fa-cog fa-lg"></i>
 			</a>

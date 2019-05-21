@@ -22,8 +22,8 @@ if(isset($_POST['post'])){
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
 			echo "Likes: " . $user['num_likes'];
-
 			?>
+			<a href="upload.php">
 		</div>
 
 	</div>

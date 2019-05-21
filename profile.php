@@ -65,10 +65,10 @@ if(isset($_POST['respond_request'])) {
  				}
  				else 
  					echo '<input type="submit" name="add_friend" class="success" value="Add Friend"><br>';
-
  			}
 
  			?>
+
  		</form>
  		<input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_form" value="Post Something">
 
