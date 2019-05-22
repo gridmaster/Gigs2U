@@ -8,7 +8,7 @@
 	$ready = false;
 
 	if((($imageType == "image/jpeg") || ($imageType == "image/jpg") || ($imageType == "image/png")) && in_array($fileExt, $validext)) {
-		//echo "was valid image<br>";
+		echo "was a valid image<br>";
 	}else{
 		echo "was not a valid image<br>";
 		$ready = false;
@@ -16,7 +16,7 @@
 
 	if($_FILES["fileUpload"]["size"] < 500000) {
 		$ready = true;
-		//echo "file size is " . $_FILES["fileUpload"]["size"] . "<br>";
+		echo "file size is " . $_FILES["fileUpload"]["size"] . "<br>";
 	}else{
 		echo "file was TO BIG!<br>";
 		echo "file size is " . $_FILES["fileUpload"]["size"] . "<br>";
@@ -37,6 +37,6 @@
 
 	if($ready == true) {
 		move_uploaded_file($sourcePath, $targetPath);
-		echo "File sucssfully loaded!";
+		echo "File sucssfully loaded! <br><img src='".$targetPath."' max-width='100px' max-height='100px'>";
 	}
 ?>
