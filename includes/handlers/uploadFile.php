@@ -34,6 +34,7 @@ if(isset($_FILES["fileUpload"]["name"])) {
 
 	$targetPath = "../assets/images/profile_pics/".$imageFile;
 	$sourcePath =  $_FILES["fileUpload"]["tmp_name"];
+	alert($sourcePath);
 	if(file_exists("../assets/images/profile_pics/".$imageFile)) {
 		echo "File already there <br>";
 		$ready = false;

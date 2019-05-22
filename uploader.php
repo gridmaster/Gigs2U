@@ -1,5 +1,4 @@
 <?php
-	include("includes/header.php");
 
 	$imageFile = ($_FILES["fileUpload"]["name"]);
 	$imageType = ($_FILES["fileUpload"]["type"]);
@@ -14,7 +13,7 @@
 		$ready = false;
 	}
 
-	if($_FILES["fileUpload"]["size"] < 500000) {
+	if($_FILES["fileUpload"]["size"] < 1000000) {
 		$ready = true;
 		echo "file size is " . $_FILES["fileUpload"]["size"] . "<br>";
 	}else{
