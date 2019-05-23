@@ -124,12 +124,13 @@ class User {
 			}
 		}
 		return $mutualFriends;
-
 	}
 
+	public function updateProfilePic($newProfilePic) {
+		$logged_in_user = $this->user['username'];
 
-
-
+		$remove_friend = mysqli_query($this->con, "UPDATE users SET profile_pic='$newProfilePic' WHERE username='$logged_in_user'");
+	}
 }
 
 ?>

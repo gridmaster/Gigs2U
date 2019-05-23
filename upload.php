@@ -1,5 +1,5 @@
 <?php 
-include("includes/header.php");
+	include("includes/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,13 @@ include("includes/header.php");
         <br>
         <div id="preview"></div>
         <br>
-		<input type="submit" value="Upload file"> </form>
+		<input type="submit" value="Upload file"> 
+	</form>
+	<br>
+	<form id="saveprofile" action="includes/form_handlers/save_profile.php" method="post" enctype="multipart/form-data">
+		<input type="submit" id="save_profile" value="Save as profile pic">
+	</form>
+	<br>
     <div id="output"></div>
 
     <script>
@@ -32,7 +38,7 @@ include("includes/header.php");
                     , processData: false
                     , success: function (data) {
                         console.log(data);
-                        $('#output').html( '<br><input type="submit" value="Save as profile pic"><br>' + data);
+                        $('#output').html(data);
                     }
                 })
             })
@@ -41,6 +47,19 @@ include("includes/header.php");
                 var myImage = new FileReader();
                 myImage.onload = imageReady;
                 myImage.readAsDataURL(this.files[0]);
+            })
+            $('#saveprofile').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "includes/form_handlers/save_profile.php"
+                    , type: "POST"
+                    , data: {}
+                    , contentType: false
+                    , processData: false
+                    , success: function (data) {
+                        $('#output').html('<br>You successfully changed your profile picture!<br>');
+                    }
+                })
             })
         })
 
@@ -55,8 +74,8 @@ include("includes/header.php");
                 }
                 , dataType: "text"
                 , success: function (data) {
-                    var str = data.replace('../..', '../gigs2u');
-                    $('#preview').html('<img id="wtf" src="' + str + '" style="max-width: 200px; max-height: 200px;">');
+                    var pic = data.replace('../..', '../gigs2u');
+                    $('#preview').html('<img id="wtf" src="' + pic + '" style="max-width: 200px; max-height: 200px;">');
                 }
             }) 
             console.log(e);

@@ -63,13 +63,10 @@ if(isset($_POST['register_button'])){
 		else {
 			array_push($error_array, "Invalid email format<br>");
 		}
-
-
 	}
 	else {
 		array_push($error_array, "Emails don't match<br>");
 	}
-
 
 	if(strlen($fname) > 25 || strlen($fname) < 2) {
 		array_push($error_array, "Your first name must be between 2 and 25 characters<br>");
@@ -91,7 +88,6 @@ if(isset($_POST['register_button'])){
 	if(strlen($password > 30 || strlen($password) < 5)) {
 		array_push($error_array, "Your password must be betwen 5 and 30 characters<br>");
 	}
-
 
 	if(empty($error_array)) {
 		$password = md5($password); //Encrypt password before sending to database

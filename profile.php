@@ -9,8 +9,6 @@ if(isset($_GET['profile_username'])) {
 	$num_friends = (substr_count($user_array['friend_array'], ",")) - 1;
 }
 
-
-
 if(isset($_POST['remove_friend'])) {
 	$user = new User($con, $userLoggedIn);
 	$user->removeFriend($username);
@@ -79,17 +77,13 @@ if(isset($_POST['respond_request'])) {
       echo '</div>';
     }
 
-
     ?>
 
  	</div>
 
-
 	<div class="profile_main_column column">
 		<div class="posts_area"></div>
     <img id="loading" src="assets/images/icons/loading.gif">
-
-
 	</div>
 
 <!-- Modal -->
@@ -114,7 +108,6 @@ if(isset($_POST['respond_request'])) {
       	</form>
       </div>
 
-
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" name="post_button" id="submit_profile_post">Post</button>
@@ -122,7 +115,6 @@ if(isset($_POST['respond_request'])) {
     </div>
   </div>
 </div>
-
 
 <script>
   var userLoggedIn = '<?php echo $userLoggedIn; ?>';
@@ -174,15 +166,9 @@ if(isset($_POST['respond_request'])) {
       return false;
 
     }); //End (window).scroll(function())
-
-
   });
 
   </script>
-
-
-
-
 
 	</div>
 </body>

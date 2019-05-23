@@ -28,6 +28,9 @@
 	}
 
 	$targetPath = "assets/images/profile_pics/".$imageFile;
+	session_start();
+	$_SESSION['targetPath'] = $targetPath;
+
 	$sourcePath =  $_FILES["fileUpload"]["tmp_name"];
 	if(file_exists("assets/images/profile_pics/".$imageFile)) {
 		echo "File already there <br>";

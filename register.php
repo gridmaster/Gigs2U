@@ -75,9 +75,6 @@ require 'includes/form_handlers/login_handler.php';
 					<br>
 					<?php if(in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
 					
-					
-
-
 					<input type="text" name="reg_lname" placeholder="Last Name" value="<?php 
 					if(isset($_SESSION['reg_lname'])) {
 						echo $_SESSION['reg_lname'];
@@ -103,7 +100,6 @@ require 'includes/form_handlers/login_handler.php';
 					else if(in_array("Invalid email format<br>", $error_array)) echo "Invalid email format<br>";
 					else if(in_array("Emails don't match<br>", $error_array)) echo "Emails don't match<br>"; ?>
 
-
 					<input type="password" name="reg_password" placeholder="Password" required>
 					<br>
 					<input type="password" name="reg_password2" placeholder="Confirm Password" required>
@@ -111,7 +107,6 @@ require 'includes/form_handlers/login_handler.php';
 					<?php if(in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>"; 
 					else if(in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
 					else if(in_array("Your password must be betwen 5 and 30 characters<br>", $error_array)) echo "Your password must be betwen 5 and 30 characters<br>"; ?>
-
 
 					<input type="submit" name="register_button" value="Register">
 					<br>

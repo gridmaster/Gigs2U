@@ -1,12 +1,10 @@
 <?php 
 include("includes/header.php");
 
-
 if(isset($_POST['post'])){
 	$post = new Post($con, $userLoggedIn);
 	$post->submitPost($_POST['post_text'], 'none');
 }
-
 
  ?>
 	<div class="user_details column">
