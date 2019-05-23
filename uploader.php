@@ -28,6 +28,7 @@
 	}
 
 	$targetPath = "assets/images/profile_pics/".$imageFile;
+	
 	session_start();
 	$_SESSION['targetPath'] = $targetPath;
 

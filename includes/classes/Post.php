@@ -235,7 +235,7 @@ class Post {
 							bootbox.confirm("Are you sure you want to delete this post?", function(result) {
 
 								$.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {result:result});
-
+console.log(result);
 								if(result)
 									location.reload();
 

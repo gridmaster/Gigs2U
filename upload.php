@@ -48,23 +48,23 @@
                 myImage.onload = imageReady;
                 myImage.readAsDataURL(this.files[0]);
             })
-            $('#saveprofile').on('submit', function (e) {
+
+            $('#saveprofile').on('click', function(e) {
                 e.preventDefault();
-                $.ajax({
-                    url: "includes/form_handlers/save_profile.php"
-                    , type: "POST"
-                    , data: {}
-                    , contentType: false
-                    , processData: false
-                    , success: function (data) {
-                        $('#output').html('<br>You successfully changed your profile picture!<br>');
+
+                bootbox.alert("?");
+                bootbox.confirm("Replace your current Profile picture with this one?", function(result) {
+console.log(result);
+                    if(result) {
+                        $.post("includes/form_handlers/save_profile.php", {result:result});
+console.log(result);
+                        window.location.href = "index.php";
                     }
-                })
-            })
+                });
+            });
         })
 
         function imageReady(e) {
-        	//alert(e.target.result);
             $('#preview').html('<img id="bfd" src="' + e.target.result + '" style="max-width: 300px; max-height: 300px;">');
             $.ajax({
                 url: "includes/handlers/save.php"
