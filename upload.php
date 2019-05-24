@@ -10,20 +10,21 @@
 </head>
 
 <body>
-    <form id="uploader" action="uploader.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileUpload" id="fileUpload">
-        <br>
-        <div id="preview"></div>
-        <br>
-		<input type="submit" value="Upload file"> 
-	</form>
-	<br>
-	<form id="saveprofile" action="includes/form_handlers/save_profile.php" method="post" enctype="multipart/form-data">
-		<input type="submit" id="save_profile" value="Save as profile pic">
-	</form>
-	<br>
-    <div id="output"></div>
-
+    <div class="main_column column" id="main_column">
+        <form  id="uploader" action="uploader.php" method="post" enctype="multipart/form-data">
+            <input class="profile_pic_button" type="file" name="fileUpload" id="fileUpload">
+            <br>
+            <div id="preview"></div>
+            <br>
+    		<input class="profile_pic_button" type="submit" value="Upload file"> 
+    	</form>
+    	<br>
+    	<form id="saveprofile" action="includes/form_handlers/save_profile.php" method="post" enctype="multipart/form-data">
+    		<input class="profile_pic_button" type="submit" id="save_profile" value="Save as profile pic">
+    	</form>
+    	<br>
+        <div id="output"></div>
+    </div>
     <script>
         $(document).ready(function () {
             $('#uploader').on('submit', function (e) {

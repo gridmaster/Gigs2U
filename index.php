@@ -12,10 +12,11 @@ if(isset($_POST['post'])){
 
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn; ?>">
+			
 			<?php 
 			echo $user['first_name'] . " " . $user['last_name'];
-
 			 ?>
+
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
@@ -90,14 +91,9 @@ if(isset($_POST['post'])){
 
 		}); //End (window).scroll(function())
 
-
 	});
 
 	</script>
-
-
-
-
 	</div>
 </body>
 </html>

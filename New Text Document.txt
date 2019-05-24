@@ -1,0 +1,2 @@
+new/
+profile_pics/
