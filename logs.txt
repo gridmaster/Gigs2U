@@ -1,0 +1,25 @@
+
+error deleting file: D:\xampp\tmp\phpFC64.tmp
+sourcePath: D:\xampp\tmp\php4497.tmp
+targetPath: assets/images/profile_pics/Eat a sandwich.jpg
+error deleting file: D:\xampp\tmp\php4497.tmp
+sourcePath: D:\xampp\tmp\php7F4D.tmp
+targetPath: assets/images/profile_pics/Poodle Boy Delux .1.jpg
+error deleting file: D:\xampp\tmp\php7F4D.tmp
+sourcePath: D:\xampp\tmp\php5B0.tmp
+targetPath: assets/images/profile_pics/Skinny Jim.jpg
+error deleting file: D:\xampp\tmp\php5B0.tmp
+sourcePath: D:\xampp\tmp\php6101.tmp
+targetPath: assets/images/profile_pics/carac1.jpg
+error deleting file: D:\xampp\tmp\php6101.tmp
+sourcePath: D:\xampp\tmp\php37BC.tmp
+targetPath: assets/images/profile_pics/baby blues.jpg
+error deleting file: D:\xampp\tmp\php37BC.tmp
+Array
+D:\xampp\tmp\php85B5.tmp
+sourcePath: D:\xampp\tmp\php85B5.tmp
+targetPath: assets/images/profile_pics/Jim and Dave.jpg
+error deleting file: D:\xampp\tmp\php85B5.tmp
+1
+1
+imagepath: 

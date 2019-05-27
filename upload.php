@@ -53,13 +53,14 @@
             $('#saveprofile').on('click', function(e) {
                 e.preventDefault();
 
-                bootbox.alert("?");
+                bootbox.alert(" ");
                 bootbox.confirm("Replace your current Profile picture with this one?", function(result) {
-console.log(result);
                     if(result) {
                         $.post("includes/form_handlers/save_profile.php", {result:result});
-console.log(result);
                         window.location.href = "index.php";
+                    }
+                    else {
+                        window.location.href = "Upload.php";                        
                     }
                 });
             });

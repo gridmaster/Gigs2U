@@ -10,12 +10,21 @@
 	}
 
 	$targetPath = $_SESSION['targetPath'];
+	$imagepath = $_SESSION['imagepath'];
 	$username = $user['username'];
 	$user_object = new User($con, $userLoggedIn);
 
 	if(isset($_POST['result'])) {
-		if($_POST['result'] == 'true')
+		if($_POST['result'] == 'true') {
 			$user_object->updateProfilePic($targetPath);
+			if(!unlink($targetPath) {
+				console.l("errror deleting file: " . $targetPath);
+			}
+		}
+		else
+		{
+			unlink($imagepath);	
+		}
 	}
 
 	header("Location: ../../upload.php");
