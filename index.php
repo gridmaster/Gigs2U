@@ -22,7 +22,7 @@ if(isset($_POST['post'])){
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
 			echo "Likes: " . $user['num_likes'];
 			?>
-			<a href="upload.php">
+
 		</div>
 
 	</div>
@@ -37,8 +37,6 @@ if(isset($_POST['post'])){
 
 		<div class="posts_area"></div>
 		<img id="loading" src="assets/images/icons/loading.gif">
-
-
 	</div>
 
 	<script>

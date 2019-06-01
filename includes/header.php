@@ -44,27 +44,46 @@ else {
 		</div>
 
 		<nav>
+			<?php
+				//Unread messages 
+				$messages = new Message($con, $userLoggedIn);
+				$num_messages = $messages->getUnreadNumber();
+
+			?>
+
 			<a href="<?php echo $userLoggedIn; ?>">
 				<?php echo $user['first_name']; ?>
 			</a>
 			<a href="index.php">
 				<i class="fa fa-home fa-lg"></i>
 			</a>
-			<a href="#">
+			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')">
 				<i class="fa fa-envelope fa-lg"></i>
+				<?php
+				if($num_messages > 0)
+				 echo '<span class="notification_badge" id="unread_message">' . $num_messages . '</span>';
+				?>
 			</a>
-			<a href="#">
+			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')">
 				<i class="fa fa-bell fa-lg"></i>
+	
 			</a>
 			<a href="requests.php">
 				<i class="fa fa-users fa-lg"></i>
-			</a>			
+
+			</a>
 			<a href="upload.php">
 				<i class="fa fa-cog fa-lg"></i>
 			</a>
 			<a href="includes/handlers/logout.php">
 				<i class="fa fa-sign-out fa-lg"></i>
 			</a>
+
 		</nav>
+
+		<div class="dropdown_data_window" style="height:0px; border:none;"></div>
+		<input type="hidden" id="dropdown_data_type" value="">
+
+
 	</div>
 	<div class="wrapper">
