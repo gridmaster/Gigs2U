@@ -29,6 +29,12 @@ a {
 	z-index: 10;
 }
 
+.logo {
+	position: absolute;
+	top: -10px;
+}
+
+
 .logo a{
 	font-family: 'Bellota-BoldItalic', sans-serif;
 	margin-left: 10px;
