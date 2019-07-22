@@ -24,6 +24,7 @@ class Message {
 			return $user_to;
 		else 
 			return $user_from;
+
 	}
 
 	public function sendMessage($user_to, $body, $date) {
@@ -31,7 +32,6 @@ class Message {
 		if($body != "") {
 			$userLoggedIn = $this->user_obj->getUsername();
 			$query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");
-			header("Location:messages.php");
 		}
 	}
 
@@ -47,9 +47,11 @@ class Message {
 			$user_to = $row['user_to'];
 			$user_from = $row['user_from'];
 			$body = $row['body'];
+			$id = $row['id'];
 
 			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
-			$data = $data . $div_top . $body . "</div><br><br>";
+			$button = "<span class='deleteButton' onclick='deleteMessage($id, this)'></span>";
+			$data = $data . $div_top . $button . $body . "</div><br><br>";
 		}
 		return $data;
 	}
@@ -68,7 +70,7 @@ class Message {
 		$end_date = new DateTime($date_time_now); //Current time
 		$interval = $start_date->diff($end_date); //Difference between dates 
 		if($interval->y >= 1) {
-			if($interval == 1)
+			if($interval->y == 1)
 				$time_message = $interval->y . " year ago"; //1 year ago
 			else 
 				$time_message = $interval->y . " years ago"; //1+ year ago
@@ -166,6 +168,7 @@ class Message {
 		}
 
 		return $return_string;
+
 	}
 
 	public function getConvosDropdown($data, $limit) {

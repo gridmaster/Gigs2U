@@ -8,6 +8,7 @@ $password = ""; //password
 $password2 = ""; //password 2
 $date = ""; //Sign up date 
 $error_array = array(); //Holds error messages
+$user_type = ""; 
 
 if(isset($_POST['register_button'])){
 

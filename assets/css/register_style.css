@@ -98,6 +98,21 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hove
 	display: none;
 }
 
+#typeLable {
+	font-family: 'Segoe UI', sans-serif;
+	margin-top: 5px;
+    height: 35px;
+    padding-left: 5px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: 35%;
+    border: 0px;
+}
 
-
-
+#memberType {
+    width: 33%;
+    margin-bottom: 10px;
+    float: top;
+    margin-top: 10px;
+    float: inherit;
+}

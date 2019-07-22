@@ -21,6 +21,7 @@ if(isset($_POST['post_message'])) {
 		$date = date("Y-m-d H:i:s");
 		$message_obj->sendMessage($user_to, $body, $date);
 	}
+
 }
 
  ?>
@@ -56,6 +57,8 @@ if(isset($_POST['post_message'])) {
 			echo "<h4>New Message</h4>";
 		}
 		?>
+
+
 
 		<div class="message_post">
 			<form action="" method="POST">
@@ -94,4 +97,4 @@ if(isset($_POST['post_message'])) {
 			<br>
 			<a href="messages.php?u=new">New Message</a>
 
-	  </div>
+		</div>

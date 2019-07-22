@@ -4,7 +4,6 @@ require 'includes/form_handlers/register_handler.php';
 require 'includes/form_handlers/login_handler.php';
 ?>
 
-
 <html>
 <head>
 	<title>Welcome to Gigs2u!</title>
@@ -26,17 +25,13 @@ require 'includes/form_handlers/login_handler.php';
 		});
 
 		</script>
-
 		';
 	}
-
 
 	?>
 
 	<div class="wrapper">
-
 		<div class="login_box">
-
 			<div class="login_header">
 				<div class="logo">
 			<img src="assets/images/icons/GIGS2U_Logo_Banner_2.jpeg" alt="Gigs2U" />
@@ -107,7 +102,15 @@ require 'includes/form_handlers/login_handler.php';
 					<?php if(in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>"; 
 					else if(in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
 					else if(in_array("Your password must be betwen 5 and 30 characters<br>", $error_array)) echo "Your password must be betwen 5 and 30 characters<br>"; ?>
-
+					<input type="text" id="typeLable" placeholder="Member Type:" readonly>
+					<select id="memberType">
+						<option value="Fan">Fan</option>
+						<option value="Musician">Musician</option>
+						<option value="Band">Band</option>
+						<option value="Venue">Venue</option>
+						<option value="Vendor">Vendor</option>
+					</select>
+					<br><br>
 					<input type="submit" name="register_button" value="Register">
 					<br>
 

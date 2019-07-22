@@ -28,7 +28,6 @@ function getUsers(value, user) {
 	});
 }
 
-
 function getDropdownData(user, type) {
 
 	if($(".dropdown_data_window").css("height") == "0px") {
@@ -61,7 +60,7 @@ function getDropdownData(user, type) {
 	}
 	else {
 		$(".dropdown_data_window").html("");
-		$(".dropdown_data_window").css({"padding" : "0px", "height": "0px", "border" : "1px solid #DADADA"});
+		$(".dropdown_data_window").css({"padding" : "0px", "height": "0px", "border" : "none"});
 	}
 
 }
