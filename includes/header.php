@@ -135,8 +135,6 @@ else {
 					success: function(response) {
 						$('.dropdown_data_window').find('.nextPageDropdownData').remove(); //Removes current .nextpage 
 						$('.dropdown_data_window').find('.noMoreDropdownData').remove(); //Removes current .nextpage 
-
-
 						$('.dropdown_data_window').append(response);
 					}
 				});
