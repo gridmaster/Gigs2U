@@ -54,6 +54,7 @@ if(isset($_POST['post_message'])) {
  		<img src="<?php echo $user_array['profile_pic']; ?>">
 
  		<div class="profile_info">
+      <p><?php echo "Mem Type: " . $user['memberType']; ?></p>
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
  			<p><?php echo "Likes: " . $user_array['num_likes']; ?></p>
  			<p><?php echo "Friends: " . $num_friends ?></p>
@@ -174,6 +175,7 @@ if(isset($_POST['post_message'])) {
 <script>
   var userLoggedIn = '<?php echo $userLoggedIn; ?>';
   var profileUsername = '<?php echo $username; ?>';
+  var member_type = '<?php echo $member_type; ?>';
 
   $(document).ready(function() {
 

@@ -31,10 +31,13 @@ if(isset($_POST['post_message'])) {
 
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn; ?>">
+
 			<?php 
-			echo $user['first_name'] . " " . $user['last_name'];
+			echo $user['first_name'] . " arf! arf! " . $user['last_name'];
+			echo $user['memberType'] . "what up???';
 
 			 ?>
+
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 

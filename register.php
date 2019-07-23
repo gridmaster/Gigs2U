@@ -103,7 +103,7 @@ require 'includes/form_handlers/login_handler.php';
 					else if(in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
 					else if(in_array("Your password must be betwen 5 and 30 characters<br>", $error_array)) echo "Your password must be betwen 5 and 30 characters<br>"; ?>
 					<input type="text" id="typeLable" placeholder="Member Type:" readonly>
-					<select id="memberType">
+					<select id="memberType" name="member_Type">
 						<option value="Fan">Fan</option>
 						<option value="Musician">Musician</option>
 						<option value="Band">Band</option>

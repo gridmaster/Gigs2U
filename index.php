@@ -16,7 +16,10 @@ if(isset($_POST['post'])){
 			<?php 
 			echo $user['first_name'] . " " . $user['last_name'];
 			 ?>
-
+			<br>
+			<?php 
+			echo $user['memberType'];
+			 ?>
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
@@ -41,6 +44,7 @@ if(isset($_POST['post'])){
 
 	<script>
 	var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+	var member_type = '<?php echo $member_type; ?>';
 
 	$(document).ready(function() {
 
