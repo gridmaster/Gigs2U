@@ -14,6 +14,9 @@ if(isset($_POST['register_button'])){
 
 	//Registration form values
 
+	// Member type
+	$user_type = strip_tags($_POST['member_Type']); //Remove html tags
+
 	//First name
 	$fname = strip_tags($_POST['reg_fname']); //Remove html tags
 	$fname = str_replace(' ', '', $fname); //remove spaces
@@ -41,8 +44,6 @@ if(isset($_POST['register_button'])){
 	//Password
 	$password = strip_tags($_POST['reg_password']); //Remove html tags
 	$password2 = strip_tags($_POST['reg_password2']); //Remove html tags
-
-	$user_type = strip_tags($_POST['member_Type']); //Remove html tags
 
 	$date = date("Y-m-d"); //Current date
 
