@@ -47,11 +47,9 @@ class Message {
 			$user_to = $row['user_to'];
 			$user_from = $row['user_from'];
 			$body = $row['body'];
-			$id = $row['id'];
 
 			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
-			$button = "<span class='deleteButton' onclick='deleteMessage($id, this)'></span>";
-			$data = $data . $div_top . $button . $body . "</div><br><br>";
+			$data = $data . $div_top . $body . "</div><br><br>";
 		}
 		return $data;
 	}
@@ -70,7 +68,7 @@ class Message {
 		$end_date = new DateTime($date_time_now); //Current time
 		$interval = $start_date->diff($end_date); //Difference between dates 
 		if($interval->y >= 1) {
-			if($interval->y == 1)
+			if($interval == 1)
 				$time_message = $interval->y . " year ago"; //1 year ago
 			else 
 				$time_message = $interval->y . " years ago"; //1+ year ago

@@ -40,7 +40,6 @@ else {
 <body>
 
 	<div class="top_bar"> 
-
 		<div class="logo">
 			<a href="index.php"><img src="assets/images/logos/GIGS2U_Logo_Banner_2.jpeg" alt="Gigs2U" /></a>
 		</div>
@@ -53,7 +52,7 @@ else {
 
 				//Unread notification 
 				$notifictions = new Notification($con, $userLoggedIn);
-				$num_notifictions = $notifictions->getUnreadNumber();
+				$num_notifications = $notifictions->getUnreadNumber();
 
 				//Unread notifications 
 				//$user_obj = new User($con, $userLoggedIn);
@@ -75,9 +74,9 @@ else {
 			</a>
 			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')">
 				<i class="fa fa-bell fa-lg"></i>
-			 	<?php
-				if($num_notifictions > 0)
-			 		echo '<span class="notification_badge" id="unread_notification">' . $num_notifictions . '</span>';
+				<?php
+				if($num_notifications > 0)
+				 echo '<span class="notification_badge" id="unread_notification">' . $num_notifications . '</span>';
 				?>
 			</a>
 			<a href="requests.php">

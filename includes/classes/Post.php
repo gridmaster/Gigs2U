@@ -16,8 +16,6 @@ class Post {
 		$check_empty = preg_replace('/\s+/', '', $body); //Deltes all spaces 
       
 		if($check_empty != "") {
-
-
 			//Current date and time
 			$date_added = date("Y-m-d H:i:s");
 			//Get username
@@ -33,12 +31,15 @@ class Post {
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification 
+			if($user_to != 'none') {
+				$notification = new Notification($this->con, $added_by);
+				$notification->insertNotification($returned_id, $user_to, "like");
+			}
 
 			//Update post count for user 
 			$num_posts = $this->user_obj->getNumPosts();
 			$num_posts++;
 			$update_query = mysqli_query($this->con, "UPDATE users SET num_posts='$num_posts' WHERE username='$added_by'");
-
 		}
 	}
 
@@ -52,12 +53,10 @@ class Post {
 		else 
 			$start = ($page - 1) * $limit;
 
-
 		$str = ""; //String to return 
 		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' ORDER BY id DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
-
 
 			$num_iterations = 0; //Number of results checked (not necasserily posted)
 			$count = 1;
@@ -88,8 +87,7 @@ class Post {
 				if($user_logged_obj->isFriend($added_by)){
 
 					if($num_iterations++ < $start)
-						continue; 
-
+						continue;
 
 					//Once 10 posts have been loaded, break
 					if($count > $limit) {
@@ -104,13 +102,11 @@ class Post {
 					else 
 						$delete_button = "";
 
-
 					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
 					$last_name = $user_row['last_name'];
 					$profile_pic = $user_row['profile_pic'];
-
 
 					?>
 					<script> 
@@ -132,7 +128,6 @@ class Post {
 
 					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 					$comments_check_num = mysqli_num_rows($comments_check);
-
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -156,14 +151,12 @@ class Post {
 							$days = $interval->d . " days ago";
 						}
 
-
 						if($interval->m == 1) {
 							$time_message = $interval->m . " month". $days;
 						}
 						else {
 							$time_message = $interval->m . " months". $days;
 						}
-
 					}
 					else if($interval->d >= 1) {
 						if($interval->d == 1) {

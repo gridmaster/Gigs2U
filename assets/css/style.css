@@ -471,11 +471,11 @@ textarea:focus {
 	top: -5px;
 }
 
-
 .resultDisplayNotification {
-	height: auto;
+    height: auto;
     color: #1485BD;
     padding-bottom: 7px;
+    min-height: 52;
 }
 
 .resultDisplayNotification img {
@@ -605,10 +605,3 @@ textarea:focus {
     display: block;
     margin: 5px auto;
 }
-
-
-
-
-
-
-
