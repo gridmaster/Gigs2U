@@ -3,7 +3,7 @@ class User {
 	private $user;
 	private $con;
 
-	public function __construct($con, $user){
+	public function __construct($con, $user) {
 		$this->con = $con;
 		$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$user'");
 		$this->user = mysqli_fetch_array($user_details_query);
@@ -11,6 +11,19 @@ class User {
 
 	public function getUsername() {
 		return $this->user['username'];
+	}
+
+	public function getNumberOfFriendRequests() {
+		$username = $this->user['username'];
+		$query = mysqli_query($this->con, "SELECT num_posts FROM friend_requests WHERE user_to='$username'");
+
+		if(!$query)
+			return 0;
+		$num_rows = mysqli_num_rows($query);
+		if($num_rows != 0)
+			return 0;
+		else
+			return $num_rows;
 	}
 
 	public function getNumPosts() {

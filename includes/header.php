@@ -44,6 +44,25 @@ else {
 			<a href="index.php"><img src="assets/images/logos/GIGS2U_Logo_Banner_2.jpeg" alt="Gigs2U" /></a>
 		</div>
 
+		<div class="search">
+
+			<form action="search.php" method="GET" name="search_form">
+				<input type="text" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" name="q" placeholder="Search..." autocomplete="off" id="search_text_input">
+
+				<div class="button_holder">
+					<img src="assets/images/icons/magnifying-glass.jpg">
+				</div>
+
+			</form>
+
+			<div class="search_results">
+			</div>
+
+			<div class="search_results_footer_empty">
+			</div>
+
+		</div>
+
 		<nav>
 			<?php
 				//Unread messages 
@@ -55,8 +74,8 @@ else {
 				$num_notifications = $notifictions->getUnreadNumber();
 
 				//Unread notifications 
-				//$user_obj = new User($con, $userLoggedIn);
-				//$num_requests = $user_obj->getNumberOfFriendRequests();
+				$user_obj = NEW User($con, $userLoggedIn);
+				$num_requests = $user_obj->getNumberOfFriendRequests();
 			?>
 
 			<a href="<?php echo $userLoggedIn; ?>">
@@ -81,10 +100,10 @@ else {
 			</a>
 			<a href="requests.php">
 				<i class="fa fa-users fa-lg"></i>
-			<!--	<?php
+				<?php
 				if($num_requests > 0)
 				 echo '<span class="notification_badge" id="unread_requests">' . $num_requests . '</span>';
-				?> -->
+				?>
 			</a>
 			<a href="settings.php">
 				<i class="fa fa-cog fa-lg"></i>
