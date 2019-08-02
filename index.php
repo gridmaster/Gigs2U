@@ -18,8 +18,14 @@ if(isset($_POST['post'])){
 			 ?>
 			<br>
 			<?php 
+			//if($user['memberType'] == 'Band') echo 'Band: ';
 			echo $user['memberType'];
+			if($user['memberType'] == 'Band' || $user['memberType'] == 'Venue' || $user['memberType'] == 'Vendor') 
+			{
+				echo ": " . $user['entityName']; 
+			}
 			 ?>
+			
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 

@@ -13,7 +13,7 @@ require 'includes/form_handlers/login_handler.php';
 </head>
 <body>
 
-	<?php  
+<?php  
 
 	if(isset($_POST['register_button'])) {
 		echo '
@@ -27,8 +27,7 @@ require 'includes/form_handlers/login_handler.php';
 		</script>
 		';
 	}
-
-	?>
+?>
 
 	<div class="wrapper">
 		<div class="login_box">
@@ -56,7 +55,6 @@ require 'includes/form_handlers/login_handler.php';
 					<a href="#" id="signup" class="signup">Need and account? Register here!</a>
 
 				</form>
-
 			</div>
 
 			<div id="registerPage">
@@ -70,34 +68,34 @@ require 'includes/form_handlers/login_handler.php';
 						<option value="Venue">Venue</option>
 						<option value="Vendor">Vendor</option>
 					</select>
-				
-					<div id="namePage">
-						<input type="text" name="reg_fname" placeholder="First Name" value="<?php 
-						if(isset($_SESSION['reg_fname'])) {
-							echo $_SESSION['reg_fname'];
-						} 
-						?>" required>
-						<br>
-						<?php if(in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
-						
-						<input type="text" name="reg_lname" placeholder="Last Name" value="<?php 
-						if(isset($_SESSION['reg_lname'])) {
-							echo $_SESSION['reg_lname'];
-						} 
-						?>" required>
-						<br>
-						<?php if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>"; ?>
-					</div>
 
 					<div id="bandPage">
-						<input type="text" name="reg_bname" id="placeholderValue" placeholder="Band Name" value="<?php 
-						if(isset($_SESSION['reg_bname'])) {
-							echo $_SESSION['reg_bname'];
+						<input type="text" name="reg_ename" id="placeholderValue" placeholder="Band Name" value="<?php 
+						if(isset($_SESSION['reg_ename'])) {
+							echo $_SESSION['reg_ename'];
 						} 
-						?>" required>
+						?>">
 						<br>
-						<?php if(in_array("Your band name must be between 1 and 25 characters<br>", $error_array)) echo "Your band name must be between 1 and 25 characters<br>"; ?>
+						<?php if(in_array("Your band/entity name must be between 1 and 25 characters<br>", $error_array)) echo "Your band/entity name must be between 1 and 25 characters<br>"; ?>
 					</div>
+				
+					<!--<div id="namePage"> -->
+					<input type="text" name="reg_fname" placeholder="First Name" value="<?php 
+					if(isset($_SESSION['reg_fname'])) {
+						echo $_SESSION['reg_fname'];
+					} 
+					?>" required>
+					<br>
+					<?php if(in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
+					
+					<input type="text" name="reg_lname" placeholder="Last Name" value="<?php 
+					if(isset($_SESSION['reg_lname'])) {
+						echo $_SESSION['reg_lname'];
+					} 
+					?>" required>
+					<br>
+					<?php if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>"; ?>
+					<!-- </div> -->
 
 					<input type="email" name="reg_email" placeholder="Email" value="<?php 
 					if(isset($_SESSION['reg_email'])) {
@@ -131,29 +129,23 @@ require 'includes/form_handlers/login_handler.php';
 					<a href="#" id="signin" class="signin">Already have an account? Sign in here!</a>
 				</form>
 			</div>
-
 		</div>
-
 	</div>
 
+	<!--Change the imput options based on user type selected -->
 	<script type="text/javascript">
 		$( ".selectMemType" ).change(function() {
 			var e = document.getElementById("memberType");
 			var strUser = e.options[e.selectedIndex].text;
 			if(e.options[e.selectedIndex].text == 'Band' || e.options[e.selectedIndex].text == 'Vendor' || e.options[e.selectedIndex].text == 'Venue') {
-				var p = document.getElementById("placeholderValue");
+				var p = document.getElementById("placeholderValue");``
 
 				$("#placeholderValue").attr("placeholder", e.options[e.selectedIndex].text + " Name").blur();
-
-	  			$("#namePage").slideUp("medium", function(){
-					$("#bandPage").slideDown("medium");
-				});
+				$("#bandPage").slideDown("medium");
 			}
 			else 
 			{
-				$("#bandPage").slideUp("medium", function() {
-					$("#namePage").slideDown("medium");
-				});
+				$("#bandPage").slideUp("medium");
 			}			
 		});
 	</script>

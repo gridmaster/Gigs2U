@@ -1,5 +1,6 @@
 <?php
 //Declaring variables to prevent errors
+$ename = ""; //Band/entity name
 $fname = ""; //First name
 $lname = ""; //Last name
 $em = ""; //email
@@ -16,6 +17,10 @@ if(isset($_POST['register_button'])){
 
 	// Member type
 	$user_type = strip_tags($_POST['member_Type']); //Remove html tags
+
+	//Entity name
+	$ename = strip_tags($_POST['reg_ename']); //Remove html tags
+	$_SESSION['reg_ename'] = $ename; //Stores entity name into session variable
 
 	//First name
 	$fname = strip_tags($_POST['reg_fname']); //Remove html tags
@@ -80,6 +85,12 @@ if(isset($_POST['register_button'])){
 		array_push($error_array,  "Your last name must be between 2 and 25 characters<br>");
 	}
 
+	if(! $ename === NULL) {
+		if(strlen($ename) > 25 || strlen($ename) == 0) {
+			array_push($error_array,  "Your band/entity name must be between 1 and 25 characters<br>");
+		}
+	}
+
 	if($password != $password2) {
 		array_push($error_array,  "Your passwords do not match<br>");
 	}
@@ -117,17 +128,20 @@ if(isset($_POST['register_button'])){
 		else if($rand == 2)
 			$profile_pic = "assets/images/profile_pics/defaults/head_emerald.png";
 
+		error_log("Bullocks: " . $user_type . ", " . $fname . ", " . $lname, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
+		error_log("Bullocks: " . $ename . ", " . $username . ", " . $em, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
+		error_log("Bullocks: " . $password . ", " . $date . ", " . $profile_pic, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
 
-		$query = mysqli_query($con, "INSERT INTO users VALUES ('', '$user_type', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+		$query = mysqli_query($con, "INSERT INTO users VALUES ('', '$user_type', '$fname', '$lname', '$ename', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
 
 		array_push($error_array, "<span style='color: #14C800;'>You're all set! Go ahead and login!</span><br>");
 
 		//Clear session variables 
 		$_SESSION['reg_fname'] = "";
 		$_SESSION['reg_lname'] = "";
+		$_SESSION['reg_ename'] = "";
 		$_SESSION['reg_email'] = "";
 		$_SESSION['reg_email2'] = "";
 	}
-
 }
 ?>

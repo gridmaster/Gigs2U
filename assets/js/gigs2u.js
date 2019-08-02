@@ -25,10 +25,7 @@ $(document).ready(function() {
 				alert('Failure');
 			}
 		});
-
 	});
-
-
 });
 
 

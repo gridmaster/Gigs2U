@@ -37,7 +37,6 @@ if(isset($_POST['post_message'])) {
               $('" . $link ."').tab('show');
           });
         </script>";
-
 }
 
 ?>
@@ -56,7 +55,7 @@ if(isset($_POST['post_message'])) {
  		<div class="profile_info">
       <p><?php echo "Mem Type: " . $user['memberType']; ?></p>
       <p><?php if($user['memberType'] == 'Band')
-                  echo "Band Name: " . $user['first_name']; 
+                  echo "Band Name: " . $user['entityName']; 
                 else
                   echo "User Name: " . $user['username']; 
                 ?></p>
@@ -141,10 +140,7 @@ if(isset($_POST['post_message'])) {
             div.scrollTop = div.scrollHeight;
           </script>
       </div>
-
     </div>
-
-
 	</div>
 
 <!-- Modal -->

@@ -116,10 +116,7 @@ else {
 
 		<div class="dropdown_data_window" style="height:0px; border:none;"></div>
 		<input type="hidden" id="dropdown_data_type" value="">
-
-
 	</div>
-
 
 	<script>
 	var userLoggedIn = '<?php echo $userLoggedIn; ?>';
