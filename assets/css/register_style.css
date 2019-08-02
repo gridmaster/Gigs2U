@@ -94,7 +94,11 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hove
 	border-color: #3498db;
 }
 
-#second {
+#registerPage {
+	display: none;
+}
+
+#bandPage {
 	display: none;
 }
 

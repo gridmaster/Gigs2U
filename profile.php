@@ -52,9 +52,14 @@ if(isset($_POST['post_message'])) {
 	
  	<div class="profile_left">
  		<img src="<?php echo $user_array['profile_pic']; ?>">
-
+  
  		<div class="profile_info">
       <p><?php echo "Mem Type: " . $user['memberType']; ?></p>
+      <p><?php if($user['memberType'] == 'Band')
+                  echo "Band Name: " . $user['first_name']; 
+                else
+                  echo "User Name: " . $user['username']; 
+                ?></p>
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
  			<p><?php echo "Likes: " . $user_array['num_likes']; ?></p>
  			<p><?php echo "Friends: " . $num_friends ?></p>
