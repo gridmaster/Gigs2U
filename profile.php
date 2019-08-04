@@ -39,6 +39,8 @@ if(isset($_POST['post_message'])) {
         </script>";
 }
 
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+
 ?>
 
  	<style type="text/css">
@@ -53,12 +55,19 @@ if(isset($_POST['post_message'])) {
  		<img src="<?php echo $user_array['profile_pic']; ?>">
   
  		<div class="profile_info">
-      <p><?php echo "Mem Type: " . $user['memberType']; ?></p>
-      <p><?php if($user['memberType'] == 'Band')
-                  echo "Band Name: " . $user['entityName']; 
-                else
-                  echo "User Name: " . $user['username']; 
-                ?></p>
+      <?php 
+        if(strpos($actual_link, $user['username']) == true) {
+          echo "<p>Mem Type: " . $user['memberType'] . "</p>";
+          echo "<p>User Name: " . $user['username'] . "</p>";
+        }
+        else {
+          $pos = strlen($actual_link) - strlen($user['username']);
+          //echo substr($actual_link, $pos-1);
+          echo "<p>User Name: " . substr($actual_link, $pos-1) . "</p>";
+
+        }
+      ?>
+
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
  			<p><?php echo "Likes: " . $user_array['num_likes']; ?></p>
  			<p><?php echo "Friends: " . $num_friends ?></p>
