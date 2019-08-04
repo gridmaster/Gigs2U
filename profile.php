@@ -61,10 +61,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
           echo "<p>User Name: " . $user['username'] . "</p>";
         }
         else {
-          $pos = strlen($actual_link) - strlen($user['username']);
-          //echo substr($actual_link, $pos-1);
-          echo "<p>User Name: " . substr($actual_link, $pos-1) . "</p>";
-
+          $pos = strrpos($actual_link, "/") + 1;
+          echo "<p>User Name: " . substr($actual_link, $pos) . "</p>";
         }
       ?>
 
