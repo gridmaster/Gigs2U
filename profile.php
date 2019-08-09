@@ -56,13 +56,20 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
   
  		<div class="profile_info">
       <?php 
-        if(strpos($actual_link, $user['username']) == true) {
+        //$member_type = $user->getMemberType($username);
+      $userToCheck = new User($con, $username);
+      $userToCheckType = $userToCheck->getMemberType($username);
+        //echo gettype($user);
+        //echo "<br>";
+        //echo $userLoggedIn . "<br>";
+        //echo $username . "<br>";
+        if($userLoggedIn === $username && ($member_type === 'Fan' || $member_type === 'Musician')) {
           echo "<p>Mem Type: " . $user['memberType'] . "</p>";
-          echo "<p>User Name: " . $user['username'] . "</p>";
+          echo "<p>Name: " . $user['first_name'] . " " . $user['last_name'] . "</p>";
         }
         else {
-          $pos = strrpos($actual_link, "/") + 1;
-          echo "<p>User Name: " . substr($actual_link, $pos) . "</p>";
+          echo "<p>Mem Type: " . $userToCheckType . "</p>";
+          echo "<p>Name: " . $userToCheck->getThisUsername($username) . "</p>";
         }
       ?>
 

@@ -13,6 +13,12 @@ class User {
 		return $this->user['username'];
 	}
 
+	public function getThisUsername($username_to_check) {
+		$query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$username_to_check'");
+		$row = mysqli_fetch_array($query);
+		return $row['first_name'] . " " . $row['last_name'];
+	}
+
 	public function getNumberOfFriendRequests() {
 		$username = $this->user['username'];
 		$query = mysqli_query($this->con, "SELECT num_posts FROM friend_requests WHERE user_to='$username'");
@@ -27,36 +33,42 @@ class User {
 	}
 
 	public function getNumPosts() {
-		$username = $this->user['username'];
-		$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE username='$username'");
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
 		return $row['num_posts'];
 	}
 
 	public function getFirstAndLastName() {
-		$username = $this->user['username'];
-		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE username='$username'");
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
 		return $row['first_name'] . " " . $row['last_name'];
 	}
 
 	public function getProfilePic() {
-		$username = $this->user['username'];
-		$query = mysqli_query($this->con, "SELECT profile_pic FROM users WHERE username='$username'");
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT profile_pic FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
 		return $row['profile_pic'];
 	}
 
+	public function getMemberType($username_to_check) {
+		$query = mysqli_query($this->con, "SELECT memberType FROM users WHERE username='$username_to_check'");
+		$row = mysqli_fetch_array($query);
+		return $row['memberType'];
+	}
+
 	public function getFriendArray() {
-		$username = $this->user['username'];
-		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE username='$username'");
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
 		return $row['friend_array'];
 	}
 
 	public function isClosed() {
-		$username = $this->user['username'];
-		$query = mysqli_query($this->con, "SELECT user_closed FROM users WHERE username='$username'");
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT user_closed FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
 
 		if($row['user_closed'] == 'yes')
