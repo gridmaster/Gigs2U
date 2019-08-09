@@ -56,13 +56,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
   
  		<div class="profile_info">
       <?php 
-        //$member_type = $user->getMemberType($username);
-      $userToCheck = new User($con, $username);
-      $userToCheckType = $userToCheck->getMemberType($username);
-        //echo gettype($user);
-        //echo "<br>";
-        //echo $userLoggedIn . "<br>";
-        //echo $username . "<br>";
+        $userToCheck = new User($con, $username);
+        $userToCheckType = $userToCheck->getMemberType($username);
+
+        //print different info depending on member type incase you're looking at someone elses profile
         if($userLoggedIn === $username && ($member_type === 'Fan' || $member_type === 'Musician')) {
           echo "<p>Mem Type: " . $user['memberType'] . "</p>";
           echo "<p>Name: " . $user['first_name'] . " " . $user['last_name'] . "</p>";

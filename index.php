@@ -4,7 +4,7 @@ include("includes/header.php");
 if(isset($_POST['post'])){
 	$post = new Post($con, $userLoggedIn);
 	$post->submitPost($_POST['post_text'], 'none');
-	$memberID = $user['memberID'];
+	header("Location: index.php");
 }
 
  ?>
@@ -31,6 +31,7 @@ if(isset($_POST['post'])){
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
 			echo "Likes: " . $user['num_likes'];
+			//echo "<br>What up! " . $user['memberID'];
 			?>
 
 		</div>
