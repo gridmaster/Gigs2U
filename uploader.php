@@ -6,12 +6,6 @@
 	$fileExt = pathinfo($imageFile, PATHINFO_EXTENSION );
 	$ready = false;
 
-	$myfile = fopen("logs.txt", "a") or die("Unable to open file!");
-	$txt = print_r($_FILES["fileUpload"]);
-	fwrite($myfile, "\n". $txt);
-	fclose($myfile);
-
-
 	if((($imageType == "image/jpeg") || ($imageType == "image/jpg") || ($imageType == "image/png")) && in_array($fileExt, $validext)) {
 		echo "was a valid image<br>";
 	}else{
@@ -39,11 +33,6 @@
 	session_start();
 	$_SESSION['targetPath'] = $targetPath;
 	$_SESSION['sourcePath'] = $sourcePath;
-
-	$myfile = fopen("logs.txt", "a") or die("Unable to open file!");
-	$txt = 'imagepath: ' . $_SESSION['imagepath'];
-	fwrite($myfile, "\n". $txt);
-	fclose($myfile);
 
 	if(file_exists("assets/images/profile_pics/".$imageFile)) {
 		echo "File already there <br>";
