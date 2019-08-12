@@ -9,12 +9,21 @@ class Post {
 	}
 
 	public function submitPost($body, $user_to) {
+ 
+ 		$logPath = "../../logs/logfile.log";
+      	$myfile = fopen(logPath, "a") or die("Unable to open file!");
+		$txt = "body: " . $body . "\n";
+		fwrite($myfile, $txt);
+		$txt = "user_to: " . $user_to . "\n";
+		fwrite($myfile, $txt);
+		fclose($myfile);
+
 		$body = strip_tags($body); //removes html tags 
 		$body = mysqli_real_escape_string($this->con, $body);
-		$body = str_replace('\r\n', "\n", $body);
+		$body = str_replace('\r\n', '\n', $body);
 		$body = nl2br($body);
 		$check_empty = preg_replace('/\s+/', '', $body); //Deltes all spaces 
-      
+
 		if($check_empty != "") {
 			//Current date and time
 			$date_added = date("Y-m-d H:i:s");
@@ -26,9 +35,19 @@ class Post {
 				$user_to = "none";
 			}
 
+	      	$myfile = fopen($logPath, "a") or die("Unable to open file!");
+			$txt = "INSERT INTO posts VALUES('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')" . "\n";
+			fwrite($myfile, $txt);
+			fclose($myfile);
+
 			//insert post 
 			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
 			$returned_id = mysqli_insert_id($this->con);
+
+	      	$myfile = fopen($logPath, "a") or die("Unable to open file!");
+			$txt = "returned_id: " . $returned_id;
+			fwrite($myfile, $txt);
+			fclose($myfile);
 
 			//Insert notification 
 			if($user_to != 'none') {
@@ -41,6 +60,7 @@ class Post {
 			$num_posts++;
 			$update_query = mysqli_query($this->con, "UPDATE users SET num_posts='$num_posts' WHERE username='$added_by'");
 		}
+
 	}
 
 	public function loadPostsFriends($data, $limit) {

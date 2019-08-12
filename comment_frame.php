@@ -58,6 +58,11 @@
 		$date_time_now = date("Y-m-d H:i:s");
 		$insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLoggedIn', '$posted_to', '$date_time_now', 'no', '$post_id')");
 
+		$myfile = fopen("logfile.log", "a") or die("Unable to open file!");
+		$txt = "commmet_frame - post_body: " . $post_body . "\n";
+		fwrite($myfile, $txt);
+		fclose($myfile);
+
 		if($posted_to != $userLoggedIn) {
 			$notification = new Notification($con, $userLoggedIn);
 			$notification->insertNotification($post_id, $posted_to, "comment");

@@ -33,6 +33,12 @@ class Message {
 			$userLoggedIn = $this->user_obj->getUsername();
 			$query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");
 		}
+
+		$myfile = fopen("Logs/logfile.log", "a") or die("Unable to open file!");
+		$txt = "Message - body: " . $body . "\n";
+		fwrite($myfile, $txt);
+		fwrite($myfile, "Message - INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')") . "\n";
+		fclose($myfile);
 	}
 
 	public function getMessages($otherUser) {
