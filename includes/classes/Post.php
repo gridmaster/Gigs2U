@@ -17,7 +17,6 @@ class Post {
       
 		if($check_empty != "" || $imageName != "") {
 
-
 			$body_array = preg_split("/\s+/", $body);
 
 			foreach($body_array as $key => $value) {
@@ -28,13 +27,9 @@ class Post {
 					$value = preg_replace("!watch\?v=!", "embed/", $link[0]);
 					$value = "<br><iframe width=\'420\' height=\'315\' src=\'" . $value ."\'></iframe><br>";
 					$body_array[$key] = $value;
-
 				}
-
 			}
 			$body = implode(" ", $body_array);
-
-
 
 			//Current date and time
 			$date_added = date("Y-m-d H:i:s");
@@ -60,12 +55,11 @@ class Post {
 			$num_posts++;
 			$update_query = mysqli_query($this->con, "UPDATE users SET num_posts='$num_posts' WHERE username='$added_by'");
 
-
 			$stopWords = "a about above across after again against all almost alone along already
 			 also although always among am an and another any anybody anyone anything anywhere are 
 			 area areas around as ask asked asking asks at away b back backed backing backs be became
 			 because become becomes been before began behind being beings best better between big 
-			 both but by c came can cannot case cases certain certainly clear clearly come could
+			 both but by c came can cant can't cannot case cases certain certainly clear clearly come could
 			 d did differ different differently do does done down down downed downing downs during
 			 e each early either end ended ending ends enough even evenly ever every everybody
 			 everyone everything everywhere f face faces fact facts far felt few find finds first
@@ -378,12 +372,10 @@ class Post {
 		else 
 			$start = ($page - 1) * $limit;
 
-
 		$str = ""; //String to return 
 		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' AND ((added_by='$profileUser' AND user_to='none') OR user_to='$profileUser')  ORDER BY id DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
-
 
 			$num_iterations = 0; //Number of results checked (not necasserily posted)
 			$count = 1;
@@ -393,11 +385,10 @@ class Post {
 				$body = $row['body'];
 				$added_by = $row['added_by'];
 				$date_time = $row['date_added'];
-
+				$imagePath = $row['image'];
 
 					if($num_iterations++ < $start)
 						continue; 
-
 
 					//Once 10 posts have been loaded, break
 					if($count > $limit) {
@@ -412,13 +403,11 @@ class Post {
 					else 
 						$delete_button = "";
 
-
 					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
 					$last_name = $user_row['last_name'];
 					$profile_pic = $user_row['profile_pic'];
-
 
 					?>
 					<script> 
@@ -440,7 +429,6 @@ class Post {
 
 					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 					$comments_check_num = mysqli_num_rows($comments_check);
-
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -506,6 +494,15 @@ class Post {
 						}
 					}
 
+					if($imagePath != "") {
+						$imageDiv = "<div class='postedImage'>
+										<img src='$imagePath'>
+									</div>";
+					}
+					else {
+						$imageDiv = "";
+					}
+					
 					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
 								<div class='post_profile_pic'>
 									<img src='$profile_pic' width='50'>
@@ -518,6 +515,7 @@ class Post {
 								<div id='post_body'>
 									$body
 									<br>
+									$imageDiv
 									<br>
 									<br>
 								</div>
@@ -545,11 +543,8 @@ class Post {
 
 								if(result)
 									location.reload();
-
 							});
 						});
-
-
 					});
 
 				</script>
@@ -565,8 +560,6 @@ class Post {
 		}
 
 		echo $str;
-
-
 	}
 
 	public function getSinglePost($post_id) {
@@ -579,7 +572,6 @@ class Post {
 		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' AND id='$post_id'");
 
 		if(mysqli_num_rows($data_query) > 0) {
-
 
 			$row = mysqli_fetch_array($data_query); 
 				$id = $row['id'];
@@ -606,12 +598,10 @@ class Post {
 				$user_logged_obj = new User($this->con, $userLoggedIn);
 				if($user_logged_obj->isFriend($added_by)){
 
-
 					if($userLoggedIn == $added_by)
 						$delete_button = "<button class='delete_button btn-danger' id='post$id'>X</button>";
 					else 
 						$delete_button = "";
-
 
 					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
@@ -642,7 +632,6 @@ class Post {
 
 					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 					$comments_check_num = mysqli_num_rows($comments_check);
-
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -735,7 +724,6 @@ class Post {
 							</div>
 							<hr>";
 
-
 				?>
 				<script>
 
@@ -751,8 +739,6 @@ class Post {
 
 							});
 						});
-
-
 					});
 
 				</script>
@@ -770,9 +756,6 @@ class Post {
 
 		echo $str;
 	}
-
-
-
 }
 
 ?>
