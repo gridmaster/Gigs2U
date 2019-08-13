@@ -570,7 +570,7 @@ textarea:focus {
 }
 
 .small_profile_pic {
-	height: 55px;
+	height: 100px;
     margin: 1px 12px 0 2px;
     float: left;
 }
