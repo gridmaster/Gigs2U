@@ -34,6 +34,11 @@ if(isset($_POST['post_message'])) {
 			echo $user['first_name'] . " " . $user['last_name'];
 
 			 ?>
+
+			 <?php 
+				echo $user['memberType'] . "<br>";
+			 ?>
+
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts'] . "<br>"; 

@@ -127,9 +127,9 @@ if(isset($_POST['register_button'])){
 		else if($rand == 2)
 			$profile_pic = "assets/images/profile_pics/defaults/head_emerald.png";
 
-		error_log("Bullocks: " . $user_type . ", " . $fname . ", " . $lname, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
-		error_log("Bullocks: " . $ename . ", " . $username . ", " . $em, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
-		error_log("Bullocks: " . $password . ", " . $date . ", " . $profile_pic, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
+		//error_log("Bullocks: " . $user_type . ", " . $fname . ", " . $lname, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
+		//error_log("Bullocks: " . $ename . ", " . $username . ", " . $em, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
+		//error_log("Bullocks: " . $password . ", " . $date . ", " . $profile_pic, 3, "D:/xampp/htdocs/gigs2u/Logs/logs.log");
 
 		$query = mysqli_query($con, "INSERT INTO users VALUES ('', '$user_type', '$fname', '$lname', '$ename', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
 

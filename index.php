@@ -1,7 +1,6 @@
 <?php 
 include("includes/header.php");
 
-
 if(isset($_POST['post'])){
 
 	$uploadOk = 1;
@@ -32,7 +31,6 @@ if(isset($_POST['post'])){
 				$uploadOk = 0;
 			}
 		}
-
 	}
 
 	if($uploadOk) {
@@ -44,9 +42,7 @@ if(isset($_POST['post'])){
 				$errorMessage
 			</div>";
 	}
-
 }
-
 
  ?>
 	<div class="user_details column">
@@ -55,8 +51,14 @@ if(isset($_POST['post'])){
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn; ?>">
 			<?php 
-			echo $user['first_name'] . " " . $user['last_name'];
-
+			if(strlen($user['entityName']) > 0)
+				echo $user['entityName'];
+			else
+				echo $user['first_name'] . " " . $user['last_name'];
+			 ?>
+			 <br>
+			<?php 
+			echo $user['memberType'] . "<br>";
 			 ?>
 			</a>
 			<br>
@@ -80,14 +82,10 @@ if(isset($_POST['post'])){
 		<div class="posts_area"></div>
 		<!-- <button id="load_more">Load More Posts</button> -->
 		<img id="loading" src="assets/images/icons/loading.gif">
-
-
 	</div>
 
 	<div class="user_details column">
-
 		<h4>Popular</h4>
-
 		<div class="trends">
 			<?php 
 			$query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
@@ -103,21 +101,14 @@ if(isset($_POST['post'])){
 				echo "<div style'padding: 1px'>";
 				echo $trimmed_word . $word_dot;
 				echo "<br></div><br>";
-
-
 			}
-
 			?>
 		</div>
-
-
 	</div>
-
-
-
 
 	<script>
 	var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+	var member_type = '<?php echo $member_type; ?>';
 
 	$(document).ready(function() {
 

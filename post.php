@@ -18,6 +18,10 @@ else {
 			echo $user['first_name'] . " " . $user['last_name'];
 
 			 ?>
+			 <br>
+			<?php 
+			echo $user['memberType'] . "<br>";
+			 ?>
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 

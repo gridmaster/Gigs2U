@@ -7,11 +7,10 @@ if(isset($_GET['profile_username'])) {
   $username = $_GET['profile_username'];
   $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$username'");
   $user_array = mysqli_fetch_array($user_details_query);
-
+  $entityName = $user_array['entityName'];
+  $memberType = $user_array['memberType'];
   $num_friends = (substr_count($user_array['friend_array'], ",")) - 1;
 }
-
-
 
 if(isset($_POST['remove_friend'])) {
   $user = new User($con, $userLoggedIn);
@@ -39,8 +38,6 @@ if(isset($_POST['post_message'])) {
               $('" . $link ."').tab('show');
           });
         </script>";
-
-
 }
 
  ?>
@@ -57,6 +54,7 @@ if(isset($_POST['post_message'])) {
     <img src="<?php echo $user_array['profile_pic']; ?>">
 
     <div class="profile_info">
+      <p><?php echo "Mem Type: " . $user['memberType']; ?></p>
       <p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
       <p><?php echo "Likes: " . $user_array['num_likes']; ?></p>
       <p><?php echo "Friends: " . $num_friends ?></p>
@@ -84,7 +82,6 @@ if(isset($_POST['post_message'])) {
         }
         else 
           echo '<input type="submit" name="add_friend" class="success" value="Add Friend"><br>';
-
       }
 
       ?>
@@ -98,12 +95,9 @@ if(isset($_POST['post_message'])) {
       echo '</div>';
     }
 
-
     ?>
 
   </div>
-
-
   <div class="profile_main_column column">
 
     <ul class="nav nav-tabs" role="tablist" id="profileTabs">
@@ -118,8 +112,11 @@ if(isset($_POST['post_message'])) {
         <img id="loading" src="assets/images/icons/loading.gif">
       </div>
       <div role="tabpanel" class="tab-pane" id="messages_div">
-        <?php  
-          echo "<h4>You and <a href='" . $username ."'>" . $profile_user_obj->getFirstAndLastName() . "</a></h4><hr><br>";
+        <?php
+          if(strlen($entityName) > 0)
+            echo "<h4>You and <a href='" . $username ."'>" . $entityName . "</a></h4><hr><br>";
+          else
+            echo "<h4>You and <a href='" . $username ."'>" . $profile_user_obj->getFirstAndLastName() . "</a></h4><hr><br>";
 
           echo "<div class='loaded_messages' id='scroll_messages'>";
             echo $message_obj->getMessages($username);
@@ -141,11 +138,7 @@ if(isset($_POST['post_message'])) {
           });
         </script>
       </div>
-
-
     </div>
-
-
   </div>
 
 <!-- Modal -->
@@ -183,6 +176,7 @@ if(isset($_POST['post_message'])) {
 <script>
   var userLoggedIn = '<?php echo $userLoggedIn; ?>';
   var profileUsername = '<?php echo $username; ?>';
+  var member_type = '<?php echo $member_type; ?>';
 
   $(document).ready(function() {
 

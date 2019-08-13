@@ -79,7 +79,15 @@ else {
 			?>
 
 			<a href="<?php echo $userLoggedIn; ?>">
-				<?php echo $user['first_name']; ?>
+				<?php 
+				if(strlen($user['entityName']) > 0)  {
+					echo $user['entityName']; 
+				}
+				else
+				{
+					echo $user['first_name']; 
+				}
+			  	?>
 			</a>
 			<a href="index.php">
 				<i class="fa fa-home fa-lg"></i>

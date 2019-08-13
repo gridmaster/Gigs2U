@@ -147,7 +147,6 @@ class Post {
 
 		if(mysqli_num_rows($data_query) > 0) {
 
-
 			$num_iterations = 0; //Number of results checked (not necasserily posted)
 			$count = 1;
 
@@ -180,7 +179,6 @@ class Post {
 					if($num_iterations++ < $start)
 						continue; 
 
-
 					//Once 10 posts have been loaded, break
 					if($count > $limit) {
 						break;
@@ -194,13 +192,17 @@ class Post {
 					else 
 						$delete_button = "";
 
-
-					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
+					$user_details_query = mysqli_query($this->con, "SELECT memberType, entityName, first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
-					$first_name = $user_row['first_name'];
-					$last_name = $user_row['last_name'];
+					if($user_row['memberType'] == "Band" || $user_row['memberType'] == "Vendor") {
+						$first_name = $user_row["entityName"];
+						$last_name = "";
+					}
+					else {
+						$first_name = $user_row['first_name'];
+						$last_name = $user_row['last_name'];
+					}
 					$profile_pic = $user_row['profile_pic'];
-
 
 					?>
 					<script> 
@@ -222,7 +224,6 @@ class Post {
 
 					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 					$comments_check_num = mysqli_num_rows($comments_check);
-
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -403,10 +404,16 @@ class Post {
 					else 
 						$delete_button = "";
 
-					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
+					$user_details_query =mysqli_query($this->con, "SELECT memberType, entityName, first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
-					$first_name = $user_row['first_name'];
-					$last_name = $user_row['last_name'];
+					if($user_row['memberType'] == "Band" || $user_row['memberType'] == "Vendor") {
+						$first_name = $user_row["entityName"];
+						$last_name = "";
+					}
+					else {
+						$first_name = $user_row['first_name'];
+						$last_name = $user_row['last_name'];
+					}
 					$profile_pic = $user_row['profile_pic'];
 
 					?>
