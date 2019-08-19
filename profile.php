@@ -98,7 +98,7 @@ if(isset($_POST['post_message'])) {
 	    </form>
 	        <input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_form" value="Post Something">
 	</div>
-	
+
 	<!-- Modal -->
 <div class="modal fade" id="post_form" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -129,6 +129,68 @@ if(isset($_POST['post_message'])) {
     </div>
   </div>
 </div>
+
+	<script>
+	var userLoggedInID = '<?php echo $userLoggedInID; ?>';
+	var member_type = '<?php echo $member_type; ?>';
+	//whose profile we're on...
+	var profile_userID = '<?php echo $profile_userID; ?>';
+
+	$(document).ready(function() {
+
+		$('#loading').show();
+
+		//Original ajax request for loading first posts 
+		$.ajax({
+			url: "includes/handlers/ajax_load_profile_posts.php",
+			type: "POST",
+			data: "page=1&userLoggedInID=" + userLoggedInID + "&profileUserID=" + profile_userID,
+			cache: false,
+
+			success: function(data) {
+				$('#loading').hide();
+				$('.posts_area').html(data);
+			}
+		});
+
+		$(window).scroll(function() {
+		//$('#load_more').on("click", function() {
+
+			var height = $('.posts_area').height(); //Div containing posts
+			var scroll_top = $(this).scrollTop();
+			var page = $('.posts_area').find('.nextPage').val();
+			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+			if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+			//if (noMorePosts == 'false') {
+				$('#loading').show();
+
+				var ajaxReq = $.ajax({
+					url: "includes/handlers/ajax_load_profile_posts.php",
+					type: "POST",
+					data: "page=" + page + "&userLoggedInID=" + userLoggedInID + "&profileUserID=" + profile_userID,
+					cache:false,
+
+					success: function(response) {
+						$('.posts_area').find('.nextPage').remove(); //Removes current .nextpage 
+						$('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
+						$('.posts_area').find('.noMorePostsText').remove(); //Removes current .nextpage 
+
+						$('#loading').hide();
+						$('.posts_area').append(response);
+					}
+				});
+
+			} //End if 
+
+			return false;
+
+		}); //End (window).scroll(function())
+
+
+	});
+
+	</script>
 
 
 </div>
