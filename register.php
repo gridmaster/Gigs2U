@@ -66,7 +66,7 @@ require 'includes/form_handlers/login_handler.php';
 						<option value="Musician">Musician</option>
 						<option value="Band">Band</option>
 						<option value="Venue">Venue</option>
-					<!--<option value="Vendor">Vendor</option> -->
+						<option value="Vendor">Vendor</option>
 					</select>
 
 					<div id="bandPage">

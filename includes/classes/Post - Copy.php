@@ -41,7 +41,7 @@ class Post {
 			}
 
 			//insert post 
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by_ID', '$user_to_ID', '$date_added', 'no', 'no', '0', '$imageName')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '', '$added_by_ID', '', '$user_to_ID', '$date_added', 'no', 'no', '0', '$imageName')");
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification
@@ -139,8 +139,8 @@ class Post {
 					continue;
 				}
 
-				$user_logged_obj = new User($this->con, $userLoggedInID);
-				if($user_logged_obj->isFriend($added_by_ID)) {
+//				$user_logged_obj = new User($this->con, $userLoggedInID);
+//				if($user_logged_obj->isFriend($added_by_ID)){
 
 					if($num_iterations++ < $start)
 						continue; 
@@ -153,10 +153,10 @@ class Post {
 						$count++;
 					}
 
-					if($userLoggedInID == $added_by_ID)
-						$delete_button = "<button class='delete_button btn-danger' id='post$id'>X</button>";
-					else 
-						$delete_button = "";
+//					if($userLoggedInID == $added_by_ID)
+//						$delete_button = "<button class='delete_button btn-danger' id='post$id'>X</button>";
+//					else 
+//						$delete_button = "";
 
 					$user_details_query = mysqli_query($this->con, "SELECT memberType, entityName, first_name, last_name, profile_pic FROM users WHERE memberID='$added_by_ID'");
 
@@ -170,8 +170,16 @@ class Post {
 						$last_name = "";
 					}
 					$profile_pic = $user_row['profile_pic'];
-					?>
 
+  	$myfile = fopen("../../logs/logfile.log", "a") or die("Unable to open file!");
+	$txt = "SELECT memberType, entityName, first_name, last_name, profile_pic FROM users WHERE memberID='$added_by_ID'\n";
+	fwrite($myfile, $txt);
+	$txt = "first_name: " . $user_row['first_name'] . " - entityName: " . $user_row['entityName'] . "\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
+
+
+								/*?>
 					<script> 
 						function toggle<?php echo $id; ?>() {
 
@@ -187,12 +195,11 @@ class Post {
 						}
 
 					</script>
-
 					<?php
 
 					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 					$comments_check_num = mysqli_num_rows($comments_check);
-
+*/
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
 					$start_date = new DateTime($date_time); //Time of post
@@ -214,6 +221,7 @@ class Post {
 						else {
 							$days = $interval->d . " days ago";
 						}
+
 
 						if($interval->m == 1) {
 							$time_message = $interval->m . " month ". $days;
@@ -265,56 +273,29 @@ class Post {
 						$imageDiv = "";
 					}
 
-					$user_to_obj = new User($this->con, $row['user_to_ID']);
-					$user_to_name = $user_to_obj->getFirstAndLastName();
-
-					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
+					$str .= "<div class='status_post'>
 								<div class='post_profile_pic'>
 									<img src='$profile_pic' width='50'>
 								</div>
 
 								<div class='posted_by' style='color:#ACACAC;'>
-									<a href='$added_by_ID'> $first_name $last_name </a> $user_to_ID &nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								$delete_button	
+									<a href='$added_by_ID'> $first_name $last_name </a> $user_to_name &nbsp;&nbsp;&nbsp;&nbsp;$time_message
 								</div>
 								<div id='post_body'>
 									$body
 									<br>
-									$imageDiv
-									<br>
-									<br>
-									<br>
 								</div>
 
-								<div class='newsfeedPostOptions'>
-									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-									<iframe src='like.php?post_id=$id' scrolling='no'></iframe>
-								</div>
-
-							</div>
-							<div class='post_comment' id='toggleComment$id' style='display:none;'>
-								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 							</div>
 							<hr>";
-				}
+				
 
-				?>
-				<script>
-
-					$(document).ready(function() {
-
-						$('#post<?php echo $id; ?>').on('click', function() {
-							bootbox.confirm("Are you sure you want to delete this post?", function(result) {
-								$.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {result:result});
-								if(result)
-									location.reload();
-							});
-						});
-					});
-
-				</script>
-				<?php
 			} //End while loop
+
+  	$myfile = fopen("../../logs/logfile.log", "a") or die("Unable to open file!");
+	$txt = $str . "\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
 
 			if($count > $limit) 
 				$str .= "<input type='hidden' class='nextPage' value='" . ($page + 1) . "'>
@@ -322,7 +303,10 @@ class Post {
 			else 
 				$str .= "<input type='hidden' class='noMorePosts' value='true'><p style='text-align: centre;'> No more posts to show! </p>";
 		}
-
+  	$myfile = fopen("../../logs/logfile.log", "a") or die("Unable to open file!");
+	$txt = "echo " . $str . "\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
 		echo $str;
 	} 
 }

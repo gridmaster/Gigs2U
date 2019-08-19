@@ -84,11 +84,10 @@ function getDropdownData(user, type) {
 		$(".dropdown_data_window").html("");
 		$(".dropdown_data_window").css({"padding" : "0px", "height": "0px", "border" : "none"});
 	}
-
 }
 
 function getLiveSearchUsers(value, user) {
-	$.post("includes/handlers/ajax_search.php", {query:value, userLoggedIn: user}, function(data) {
+	$.post("includes/handlers/ajax_search.php", {query: value, userLoggedIn: user}, function(data) {
 		if($(".search_results_footer_empty")[0]) {
 			$(".search_results_footer_empty").toggleClass("search_results_footer");
 			$(".search_results_footer_empty").toggleClass("search_results_footer_empty");
