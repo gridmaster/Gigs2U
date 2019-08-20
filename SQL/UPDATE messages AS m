@@ -1,0 +1,7 @@
+UPDATE messages AS m
+LEFT JOIN users AS u ON u.username = m.user_to
+SET m.user_to_ID = u.memberID
+
+UPDATE messages AS m
+LEFT JOIN users AS u ON u.username = m.user_from
+SET m.user_from_ID = u.memberID

@@ -1,50 +1,40 @@
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-post_id: 156
-UPDATE posts SET deleted='yes' WHERE id='156'
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 22
-userLoggedInID: 11 - added_by_ID: 17
-userLoggedInID: 11 - added_by_ID: 11
-userLoggedInID: 11 - added_by_ID: 11
+body: qqqqqqqqqqq
+user_to_ID: 
+user_from_ID: 
+body: ???????????????
+user_to_ID: 22
+user_from_ID: 11
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='17' ORDER BY id DESC
+thisUserID: 17
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='13' ORDER BY id DESC
+thisUserID: 13
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='18' ORDER BY id DESC
+thisUserID: 18
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='16' ORDER BY id DESC
+thisUserID: 16
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='14' ORDER BY id DESC
+thisUserID: 14
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='15' ORDER BY id DESC
+thisUserID: 15
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='12' ORDER BY id DESC
+thisUserID: 12
+ajax_load_messages
+userLoggedInID: 11
+SELECT user_to_ID, user_from_ID FROM messages WHERE memberID='11' OR user_from_ID='11' ORDER BY id DESC
+userLoggedInID: 11
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='17' ORDER BY id DESC
+thisUserID: 17
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='13' ORDER BY id DESC
+thisUserID: 13
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='18' ORDER BY id DESC
+thisUserID: 18
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='16' ORDER BY id DESC
+thisUserID: 16
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='14' ORDER BY id DESC
+thisUserID: 14
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='15' ORDER BY id DESC
+thisUserID: 15
+SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='12' ORDER BY id DESC
+thisUserID: 12
+ajax_load_messages
+userLoggedInID: 11

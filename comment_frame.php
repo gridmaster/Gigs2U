@@ -51,7 +51,7 @@ include("includes/classes/Post.php");
 		$post_body = $_POST['post_body'];
 		$post_body = mysqli_escape_string($con, $post_body);
 		$date_time_now = date("Y-m-d H:i:s");
-		$insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '', '$userLoggedInID', '', '$posted_to_ID', '$date_time_now', 'no', '$post_id')");
+		$insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLoggedInID', '$posted_to_ID', '$date_time_now', 'no', '$post_id')");
 
 		echo "<p>Comment Posted! </p>";
 	}
@@ -144,7 +144,6 @@ include("includes/classes/Post.php");
 			}
 
 			$user_obj = new User($con, $posted_by_ID);
-
 
 			?>
 			<div class="comment_section">

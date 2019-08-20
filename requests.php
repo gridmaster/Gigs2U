@@ -27,14 +27,14 @@ include("includes/header.php"); //Header
 				$add_friend_query = mysqli_query($con, "INSERT INTO friends VALUES('', '$userLoggedInID', '$user_from_ID', 'no')");
 
 				$delete_query = mysqli_query($con, "DELETE FROM friend_requests WHERE user_to_ID='$userLoggedInID' AND user_from_ID='$user_from_ID'");
-
+/*
   	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
 	$txt = "INSERT INTO friends VALUES('', '$user_from_ID', '$userLoggedInID')\n";
 	fwrite($myfile, $txt);
 	$txt = "user_from_ID: " . $user_row['user_from_ID'] . " - userLoggedInID: " . $user_row['userLoggedInID'] . "\n";
 	fwrite($myfile, $txt);
 	fclose($myfile);
-
+*/
 				echo "You are now friends!";
 				header("Location: requests.php");
 			}

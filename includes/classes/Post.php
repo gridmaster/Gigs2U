@@ -44,9 +44,15 @@ class Post {
 			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by_ID', '$user_to_ID', '$date_added', 'no', 'no', '0', '$imageName')");
 			$returned_id = mysqli_insert_id($this->con);
 
+  	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+	$txt = "INSERT INTO posts VALUES('', '$body', '$added_by_ID', '$user_to_ID', '$date_added', 'no', 'no', '0', '$imageName')\n";
+	fwrite($myfile, $txt);
+	fclose($myfile);
+
+
 			//Insert notification
-			if($user_to_ID != 'none') {
-				$notification = new Notification($this->con, $added_by);
+			if($user_to_ID != "0") {
+				$notification = new Notification($this->con, $added_by_ID);
 				$notification->insertNotification($returned_id, $user_to_ID, "like");
 			}
 
@@ -330,7 +336,7 @@ class Post {
 
 		$page = $data['page']; 
 		$userLoggedInID = $this->user_obj->getMemberID();
-		$profileUserID = $data['profile_userID']
+		$profileUserID = $data['profileUserID'];
 
 		if($page == 1) 
 			$start = 0;
@@ -338,7 +344,7 @@ class Post {
 			$start = ($page - 1) * $limit;
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' AND (added_by_ID='$profileUserID' AND user_to_ID = '0' ORDER BY id DESC");
+		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' AND ((added_by_ID='$profileUserID' AND user_to_ID = '0')  OR user_to_ID='$profileUserID') ORDER BY id DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -351,25 +357,6 @@ class Post {
 				$added_by_ID = $row['added_by_ID'];
 				$date_time = $row['date_added'];
 				$imagePath = $row['image'];
-
-				//Prepare user_to string so it can be included even if not posted to a user
-				if($row['user_to_ID'] == "0") {
-					$user_to_ID = "";
-				}
-				else {
-					$user_to_obj = new User($this->con, $row['user_to_ID']);
-					$user_to_name = $user_to_obj->getFirstAndLastName();
-					$user_to_ID = "to <a href='" . $row['user_to_ID'] ."'>" . $user_to_name . "</a>";
-				}
-
-				//Check if user who posted, has their account closed
-				$added_by_obj = new User($this->con, $added_by_ID);
-				if($added_by_obj->isClosed()) {
-					continue;
-				}
-
-				$user_logged_obj = new User($this->con, $userLoggedInID);
-				if($user_logged_obj->isFriend($added_by_ID)) {
 
 					if($num_iterations++ < $start)
 						continue; 
@@ -494,8 +481,8 @@ class Post {
 						$imageDiv = "";
 					}
 
-					$user_to_obj = new User($this->con, $row['user_to_ID']);
-					$user_to_name = $user_to_obj->getFirstAndLastName();
+					$added_by_user = new User($this->con, $added_by_ID);
+					$added_by_user_name = $added_by_user->getFirstAndLastName();
 
 					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
 								<div class='post_profile_pic'>
@@ -503,7 +490,7 @@ class Post {
 								</div>
 
 								<div class='posted_by' style='color:#ACACAC;'>
-									<a href='$added_by_ID'> $first_name $last_name </a> $user_to_ID &nbsp;&nbsp;&nbsp;&nbsp;$time_message
+									<a href='$added_by_ID'> $added_by_user_name </a>&nbsp;&nbsp;&nbsp;&nbsp;$time_message
 								$delete_button	
 								</div>
 								<div id='post_body'>
@@ -525,7 +512,7 @@ class Post {
 								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 							</div>
 							<hr>";
-				}
+
 
 				?>
 				<script>

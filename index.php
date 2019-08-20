@@ -35,7 +35,7 @@ if(isset($_POST['post'])){
 
 	if($uploadOk) {
 		$post = new Post($con, $userLoggedInID);
-		$post->submitPost($_POST['post_text'], 'none', $imageName);
+		$post->submitPost($_POST['post_text'], '0', $imageName);
 		header("Location: index.php");
 	}
 	else {
@@ -63,8 +63,9 @@ if(isset($_POST['post'])){
 			 ?>
 			</a>
 			<br>
-			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
-			echo "Likes: " . $user['num_likes'];
+			<?php $profile_user = new User($con, $user['memberID']);
+				echo "Posts: " . $profile_user->getNumPosts() . "<br>"; 
+				echo "Likes: " . $profile_user->getNumLikes();
 
 			?>
 		</div>

@@ -26,6 +26,7 @@ class User {
 		$memberID = $this->user['memberID'];
 		$query = mysqli_query($this->con, "SELECT profile_pic FROM users WHERE memberID='$memberID'");
 		$row = mysqli_fetch_array($query);
+
 		return $row['profile_pic'];
 	}
 
@@ -44,9 +45,23 @@ class User {
 
 	public function getNumPosts() {
 		$memberID = $this->user['memberID'];
-		$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE memberID='$memberID'");
+		$query = mysqli_query($this->con, "SELECT COUNT(ID) AS 'Count' FROM posts WHERE added_by_ID = '$memberID'");
 		$row = mysqli_fetch_array($query);
-		return $row['num_posts'];
+		return $row['Count'];
+	}
+
+	public function getNumLikes() {
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT COUNT(ID) AS 'Count' FROM likes WHERE memberID = '$memberID'");
+		$row = mysqli_fetch_array($query);
+		return $row['Count'];
+	}
+
+	public function getNumFriends() {
+		$memberID = $this->user['memberID'];
+		$query = mysqli_query($this->con, "SELECT COUNT(ID) AS 'Count' FROM friends WHERE memberID = '$memberID'");
+		$row = mysqli_fetch_array($query);
+		return $row['Count'];
 	}
 
 	public function getFriendArray() {
@@ -110,6 +125,18 @@ class User {
 	public function sendRequest($user_to_ID) {
 		$user_from_ID = $this->user['memberID'];
 		$query = mysqli_query($this->con, "INSERT INTO friend_requests VALUES('', '$user_to_ID', '$user_from_ID')");
+	}
+
+	public function getMutualFriends($user_to_check_ID) {
+		$mutualFriends = 0;
+
+		$memberID = $this->user['memberID'];
+
+		$query = "SELECT f1.* FROM friends f1 RIGHT JOIN friends f2 ON (f1.friendID = f2.friendID) WHERE f1.memberID = '$memberID' AND f2.memberID = '$user_to_check_ID'";
+ 
+ 		$mutualFriendsQuery = mysqli_query($this->con, $query);
+
+		return mysqli_num_rows($mutualFriendsQuery);
 	}
 
 }
