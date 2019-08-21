@@ -140,13 +140,6 @@ class Message {
 
 		$query = mysqli_query($this->con, "SELECT user_to_ID, user_from_ID FROM messages WHERE user_to_ID='$userLoggedInID' OR user_from_ID='$userLoggedInID' ORDER BY id DESC");
 
-  	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
-	$txt = "SELECT user_to_ID, user_from_ID FROM messages WHERE memberID='$userLoggedInID' OR user_from_ID='$userLoggedInID' ORDER BY id DESC\n";
-	fwrite($myfile, $txt);
-	$txt = "userLoggedInID: " . $userLoggedInID . "\n";
-	fwrite($myfile, $txt);
-	fclose($myfile);
-
 		while($row = mysqli_fetch_array($query)) {
 			$user_to_push = ($row['user_to_ID'] != $userLoggedInID) ? $row['user_to_ID'] : $row['user_from_ID'];
 
@@ -216,14 +209,6 @@ class Message {
 			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to_ID='$userLoggedInID' AND user_from_ID='$thisUserID' ORDER BY id DESC");
 			$row = mysqli_fetch_array($is_unread_query);
 			$style = ($row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
-
-  	$myfile = fopen("../../logs/logfile.log", "a") or die("Unable to open file!");
-	$txt = "SELECT opened FROM messages WHERE user_to_ID='$userLoggedInID' AND user_from_ID='$thisUserID' ORDER BY id DESC\n";
-	fwrite($myfile, $txt);
-	$txt = "thisUserID: " . $thisUserID . "\n";
-	fwrite($myfile, $txt);
-	fclose($myfile);
-
 			$user_found_obj = new User($this->con, $thisUserID);
 			$latest_message_details = $this->getLatestMessage($userLoggedInID, $thisUserID);
 

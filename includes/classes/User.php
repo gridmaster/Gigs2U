@@ -36,11 +36,12 @@ class User {
 
 		if(!$query)
 			return 0;
-		$num_rows = mysqli_num_rows($query);
-		if($num_rows != 0)
-			return 0;
-		else
-			return $num_rows;
+
+		return mysqli_num_rows($query);
+		//if($num_rows != 0)
+	//		return 0;
+	//	else
+	//		return $num_rows;
 	}
 
 	public function getNumPosts() {

@@ -66,7 +66,6 @@ if(isset($_POST['post'])){
 			<?php $profile_user = new User($con, $user['memberID']);
 				echo "Posts: " . $profile_user->getNumPosts() . "<br>"; 
 				echo "Likes: " . $profile_user->getNumLikes();
-
 			?>
 		</div>
 	</div>
