@@ -57,3 +57,15 @@ INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your
 INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your post', 'post.php?id=131', '2019-08-21 12:52:06', 'no', 'no')
 INSERT INTO notifications VALUES('', '', '17', '', '11', 'Jim Ballard liked your post', 'post.php?id=120', '2019-08-21 12:52:37', 'no', 'no')
 INSERT INTO notifications VALUES('', '', '11', '', '17', 'Marge Simpson liked your post', 'post.php?id=58', '2019-08-21 13:07:37', 'no', 'no')
+body: Jim to Marge's wall.
+user_to_ID: 17
+user_from_ID: 11
+ajax_load_messages
+userLoggedInID: 11
+INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your post', 'post.php?id=141', '2019-08-21 22:17:18', 'no', 'no')
+ajax_load_messages
+userLoggedInID: 11
+ajax_load_messages
+userLoggedInID: 11
+ajax_load_messages
+userLoggedInID: 11

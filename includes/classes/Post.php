@@ -535,7 +535,7 @@ class Post {
 		echo $str;
 	} 
 
-		public function getSinglePost($post_id) {
+	public function getSinglePost($post_id) {
 
 		$userLoggedInID = $this->user_obj->getMemberID();
 

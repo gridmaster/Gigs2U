@@ -24,7 +24,7 @@ if($query != ""){
 		$user = new User($con, $userLoggedInID);
 
 		if($row['memberID'] != $userLoggedInID)
-			$mutual_friends = $user->getMutualFriends($row['memberID']) . " xfriends in common";
+			$mutual_friends = $user->getMutualFriends($row['memberID']) . " friends in common";
 		else 
 			$mutual_friends = "";
 
