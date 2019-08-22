@@ -68,6 +68,7 @@ if(isset($_POST['post'])){
 				echo "Likes: " . $profile_user->getNumLikes();
 			?>
 		</div>
+
 	</div>
 
 	<div class="main_column column">
@@ -86,6 +87,43 @@ if(isset($_POST['post'])){
 			$user_obj = new User($con, $userLoggedInID);
 			echo $user_obj->getFirstAndLastName();
 		?>
+	</div>
+
+	<div class="user_details column">
+		<div class="trends">
+			<div class="map_details column">
+		
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7430.064542698058!2d-77.44952397283566!3d38.46554663436941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6ee3b5f124d69%3A0xc2a48d58577aebe8!2s5+Greystone+Pl%2C+Stafford%2C+VA+22554!5e0!3m2!1sen!2sus!4v1566428777328!5m2!1sen!2sus" width="100%" height="400px" frameborder="0" style="border:0; clear: both; " allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+
+	<div class="user_details column">
+		<h4>Popular</h4>
+		<div class="trends">
+			<?php 
+			$query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
+
+			foreach ($query as $row) {
+				
+				$word = $row['title'];
+				$word_dot = strlen($word) >= 14 ? "..." : "";
+
+				$trimmed_word = str_split($word, 14);
+				$trimmed_word = $trimmed_word[0];
+
+				echo "<div style'padding: 1px'>";
+				echo $trimmed_word . $word_dot;
+				echo "<br></div><br>";
+			}
+			?>
+		</div>
+	</div>
+
+	<div class="rightside_column column">
+		<div>
+			need new column here...
+		</div>
 	</div>
 
 	<script>

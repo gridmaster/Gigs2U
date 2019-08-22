@@ -74,7 +74,7 @@ nav a:hover {
 	top: 50px;
 	position: relative;
 	padding: 0 10px;
-	width: 75%;
+	width: 98%;
 	min-width: 950px;
 }
 
@@ -88,28 +88,32 @@ nav a:hover {
 }
 
 .user_details {
-	width: 250px;
+	width: 40%;
 	float: left;
 	margin-bottom: 20px;
 }
 
 .user_details img {
-	height: 120px;
+	height: 80px;
 	border-radius: 5px;
 	margin-right: 5px;
 }
 
 .user_details_left_right {
-	width: 90;
+	width: 90px;
 	display: inline-table;
 	position: absolute;
-}
+} 
 
 .main_column {
 	float:right;
-	width: 70%;
+	width: 550px;
 	z-index: -1;
 	min-height: 170px;
+}
+
+.rightside_column {
+
 }
 
 .post_form {
@@ -131,7 +135,7 @@ textarea:focus {
 }
 
 .post_form input[type="submit"] {
-	width: 11%;
+	width: 100px;
 	height: 60px;
 	border: none;
 	border-radius: 3px;
