@@ -3,7 +3,7 @@ include("../../config/config.php");
 include("../classes/User.php");
 include("../classes/Post.php");
 
-$limit = 8; //Number of posts to be loaded per call
+$limit = 10; //Number of posts to be loaded per call
 
 $posts = new Post($con, $_REQUEST['userLoggedInID']);
 $posts->loadPostsFriends($_REQUEST, $limit);

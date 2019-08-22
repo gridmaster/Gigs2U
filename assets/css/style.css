@@ -106,8 +106,8 @@ nav a:hover {
 } 
 
 .main_column {
-	float:right;
-	width: 550px;
+	float: right;
+	width: 540px;
 	z-index: -1;
 	min-height: 170px;
 }
@@ -116,6 +116,12 @@ nav a:hover {
 
 }
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .post_form {
 	width: 100%;
 }
@@ -273,18 +279,23 @@ textarea:focus {
 .danger {
 	background-color: #e74c3c;
 }
+
 .warning {
 	background-color: #f0ad4e;
 }
+
 .default {
 	background-color: #bdc3c7;
 }
+
 .success {
 	background-color: #2ecc71;
 }
+
 .info {
 	background-color: #3498db;
 }
+
 .deep_blue {
 	background-color: #0043f0;
 }
@@ -307,6 +318,7 @@ textarea:focus {
 	color: #fff;
 	background-color: #2ecc71;
 }
+
 #ignore_button {
 	width: 20%;
 	height: 28px;
@@ -375,6 +387,7 @@ textarea:focus {
 	float: right;
 	margin-bottom: 5px;
 }
+
 .message#green {
 	background-color: #2ecc71;
 	border-color: #27ae60;
@@ -420,13 +433,16 @@ textarea:focus {
 	height: 65px;
 	border-bottom: 1px solid #D3D3D3;
 }
+
 .resultDisplay a {
 	float: none;
 }
+
 .resultDisplay:hover {
 	background-color: #EBEBEB;
 	text-decoration: none;
 }
+
 .liveSearchProfilePic img {
 	height: 50px;
 	border-radius: 25px;
@@ -597,7 +613,6 @@ textarea:focus {
     color: #fff;
 }
 
-
 .message .deleteButton {
    color: #fff;
    margin: 0 5px 5px 0;
@@ -609,4 +624,5 @@ textarea:focus {
     max-width: 100%;
     display: block;
     margin: 5px auto;
+    padding-top: 5px;
 }

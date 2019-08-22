@@ -120,12 +120,6 @@ if(isset($_POST['post'])){
 		</div>
 	</div>
 
-	<div class="rightside_column column">
-		<div>
-			need new column here...
-		</div>
-	</div>
-
 	<script>
 	var userLoggedInID = '<?php echo $userLoggedInID; ?>';
 	var member_type = '<?php echo $member_type; ?>';
