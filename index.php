@@ -46,32 +46,64 @@ if(isset($_POST['post'])){
 }
 
 ?>
-	<div class="user_details column">
-		<a href="#"> <img src="<?php echo $user['profile_pic']; ?>"> </a>
+<div class="row">
+	<div class="column" id="column-1">
+		
+		<div class="col-1-cont">
+			<a href="#"> <img src="<?php echo $user['profile_pic']; ?>"> </a>
 
-		<div class="user_details_left_right">
-			<a href="<?php echo $userLoggedInID; ?>">
-			<?php 
-			if(strlen($user['entityName']) > 0)
-				echo $user['entityName'];
-			else
-				echo $user['first_name'] . " " . $user['last_name'];
-			 ?>
-			 <br>
-			<?php 
-			echo $user['memberType'] . "<br>";
-			 ?>
-			</a>
-			<br>
-			<?php $profile_user = new User($con, $user['memberID']);
-				echo "Posts: " . $profile_user->getNumPosts() . "<br>"; 
-				echo "Likes: " . $profile_user->getNumLikes();
-			?>
+			<div class="user_details_left_right">
+				<a href="<?php echo $userLoggedInID; ?>">
+				<?php 
+				if(strlen($user['entityName']) > 0)
+					echo $user['entityName'];
+				else
+					echo $user['first_name'] . " " . $user['last_name'];
+				 ?>
+				 <br>
+				<?php 
+				echo $user['memberType'] . "<br>";
+				 ?>
+				</a>
+				<br>
+				<?php $profile_user = new User($con, $user['memberID']);
+					echo "Posts: " . $profile_user->getNumPosts() . "<br>"; 
+					echo "Likes: " . $profile_user->getNumLikes();
+				?>
+			</div>
 		</div>
 
-	</div>
+		<div class="col-1-cont">
+			<div class="trends">
+				<div class="map_details column">
+			
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7430.064542698058!2d-77.44952397283566!3d38.46554663436941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6ee3b5f124d69%3A0xc2a48d58577aebe8!2s5+Greystone+Pl%2C+Stafford%2C+VA+22554!5e0!3m2!1sen!2sus!4v1566428777328!5m2!1sen!2sus" width="100%" height="400px" frameborder="0" style="border:0; clear: both; " allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<div class="col-1-cont">
+			<h4>Popular</h4>
+			<div class="trends">
+				<?php 
+				$query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
 
-	<div class="main_column column">
+				foreach ($query as $row) {
+					
+					$word = $row['title'];
+					$word_dot = strlen($word) >= 14 ? "..." : "";
+
+					$trimmed_word = str_split($word, 14);
+					$trimmed_word = $trimmed_word[0];
+
+					echo "<div style'padding: 1px'>";
+					echo $trimmed_word . $word_dot;
+					echo "<br></div><br>";
+				}
+				?>
+			</div>
+		</div>
+	</div>
+    <div class="column">
 		<form class="post_form" action="index.php" method="POST" enctype="multipart/form-data">
 			<input type="file" name="fileToUpload" id="fileToUpload">
 			<textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
@@ -87,38 +119,12 @@ if(isset($_POST['post'])){
 			$user_obj = new User($con, $userLoggedInID);
 			echo $user_obj->getFirstAndLastName();
 		?>
-	</div>
-
-	<div class="user_details column">
-		<div class="trends">
-			<div class="map_details column">
-		
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7430.064542698058!2d-77.44952397283566!3d38.46554663436941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6ee3b5f124d69%3A0xc2a48d58577aebe8!2s5+Greystone+Pl%2C+Stafford%2C+VA+22554!5e0!3m2!1sen!2sus!4v1566428777328!5m2!1sen!2sus" width="100%" height="400px" frameborder="0" style="border:0; clear: both; " allowfullscreen></iframe>
-			</div>
-		</div>
-	</div>
-
-	<div class="user_details column">
-		<h4>Popular</h4>
-		<div class="trends">
-			<?php 
-			$query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
-
-			foreach ($query as $row) {
-				
-				$word = $row['title'];
-				$word_dot = strlen($word) >= 14 ? "..." : "";
-
-				$trimmed_word = str_split($word, 14);
-				$trimmed_word = $trimmed_word[0];
-
-				echo "<div style'padding: 1px'>";
-				echo $trimmed_word . $word_dot;
-				echo "<br></div><br>";
-			}
-			?>
-		</div>
-	</div>
+    </div>
+    <div class="column" style="background-color:#ccc; height: 200px;">
+        <h2>Column 3</h2>
+        <p>Ad's are going here...</p>
+    </div>
+</div>
 
 	<script>
 	var userLoggedInID = '<?php echo $userLoggedInID; ?>';
