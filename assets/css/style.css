@@ -112,6 +112,7 @@ nav a:hover {
 	width: 90px;
 	display: inline-table;
 	position: absolute;
+	width: 255px;
 } 
 
 .main_column {
@@ -129,13 +130,24 @@ nav a:hover {
   display: flex;
 }
 
-.column-1 {
-	background-color: #E6EAE8;
+.ad-column {
+	height: 200px;
+	max-width: 220px;"
 }
 
-.column {
+.column-one {
+	background-color: #E6EAE8;
+	max-width: 560px;
+}
+
+.column-flex {
 	flex: 1;
 	margin-right: 10px;
+	background-color: #fff;
+	padding: 10px;
+	border: 1px solid #D3D3D3;
+	border-radius: 5px;
+	box-shadow: 2px 2px 1px #D3D3D3;
 }
 
 .col-1-cont {
@@ -149,7 +161,18 @@ nav a:hover {
 }
 
 .col-1-cont img {
-	height: 80px;
+	height: 20px;
+	border-radius: 5px;
+	margin-right: 5px;
+}
+
+.col-1-cont-top {
+	padding: 1rem;
+    margin-bottom: 10px;
+}
+
+.col-1-cont-top img {
+	height: 20px;
 	border-radius: 5px;
 	margin-right: 5px;
 }
@@ -276,8 +299,7 @@ textarea:focus {
 
 .profile_left {
 	top: -10px;
-	width: 17%;
-	max-width: 240px;
+	width: 96%;
 	min-width: 130px;
 	height: 100%;
 	float: left;
@@ -285,12 +307,16 @@ textarea:focus {
 	background-color: #37B0E9;
 	border-right: 10px solid #83D6FE;
 	color: #CBEAF8;
-	margin-right: 20px;
+	margin: 5 5 10 10;
+	border-radius: 5px;
 }
 
 .profile_left img {
-	min-width: 80px;
-	width: 55%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    width: 100px;
 	margin: 20px;
 	border: 5px solid #83D6FE;
 	border-radius: 100px;
@@ -336,7 +362,7 @@ textarea:focus {
 	width: 90%;
 	height: 30px;
 	border-radius: 5px;
-	margin: 7px 0 0 7px;
+	margin: 7px;
 	border: none;
 	color: #fff;
 }

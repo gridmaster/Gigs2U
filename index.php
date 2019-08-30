@@ -46,41 +46,67 @@ if(isset($_POST['post'])){
 }
 
 ?>
+
+<!--*************************** Main page layout *************************-->
 <div class="row">
-	<div class="column" id="column-1">
+<!--***************************      Column 1     *************************-->
+	<div class="column-flex column-one">
 		
-		<div class="col-1-cont">
+<!--************************      Column 1 Block 1    *********************-->	
+		<div class="col-1-cont-top">
 			<a href="#"> <img src="<?php echo $user['profile_pic']; ?>"> </a>
 
 			<div class="user_details_left_right">
 				<a href="<?php echo $userLoggedInID; ?>">
 				<?php 
 				if(strlen($user['entityName']) > 0)
-					echo $user['entityName'];
+					echo $user['entityName'] . " - " . $user['memberType'] . "<br>";
 				else
-					echo $user['first_name'] . " " . $user['last_name'];
-				 ?>
-				 <br>
-				<?php 
-				echo $user['memberType'] . "<br>";
+					echo $user['first_name'] . " " . $user['last_name'] . " - " . $user['memberType'] . "<br>";
 				 ?>
 				</a>
-				<br>
-				<?php $profile_user = new User($con, $user['memberID']);
-					echo "Posts: " . $profile_user->getNumPosts() . "<br>"; 
-					echo "Likes: " . $profile_user->getNumLikes();
-				?>
+
 			</div>
 		</div>
 
+<!--************************      Column 1 Block 2    *********************-->	
 		<div class="col-1-cont">
 			<div class="trends">
 				<div class="map_details column">
-			
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7430.064542698058!2d-77.44952397283566!3d38.46554663436941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6ee3b5f124d69%3A0xc2a48d58577aebe8!2s5+Greystone+Pl%2C+Stafford%2C+VA+22554!5e0!3m2!1sen!2sus!4v1566428777328!5m2!1sen!2sus" width="100%" height="400px" frameborder="0" style="border:0; clear: both; " allowfullscreen></iframe>
+					<script type='text/javascript'>
+				    var map;
+
+				    function GetMap() {
+				        map = new Microsoft.Maps.Map('#myMap', {});
+
+				        Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function () {
+				            var manager = new Microsoft.Maps.AutosuggestManager({ map: map });
+				            manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+				        });
+				    }
+
+				    function selectedSuggestion(result) {
+				        //Remove previously selected suggestions from the map.
+				        map.entities.clear();
+
+				        //Show the suggestion as a pushpin and center map over it.
+				        var pin = new Microsoft.Maps.Pushpin(result.location);
+				        map.entities.push(pin);
+				        map.setView({ bounds: result.bestView });
+				    }
+				    </script>
+				    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
+				    <div id='searchBoxContainer'>
+				    	<!-- <label for="searchBox">Search: </label> -->
+			        	<input type='text' id='searchBox' style="margin-bottom: 5px; width: 100%;" placeholder="Search"/>
+				    </div>
+
+				    <div id="myMap" style="position:relative;width:100%;height:300px;"></div>
 				</div>
 			</div>
 		</div>
+
+<!--************************      Column 1 Block 3    *********************-->	
 		<div class="col-1-cont">
 			<h4>Popular</h4>
 			<div class="trends">
@@ -103,7 +129,9 @@ if(isset($_POST['post'])){
 			</div>
 		</div>
 	</div>
-    <div class="column">
+
+<!--***************************      Column 2     *************************-->
+    <div class="column-flex">
 		<form class="post_form" action="index.php" method="POST" enctype="multipart/form-data">
 			<input type="file" name="fileToUpload" id="fileToUpload">
 			<textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
@@ -120,9 +148,13 @@ if(isset($_POST['post'])){
 			echo $user_obj->getFirstAndLastName();
 		?>
     </div>
-    <div class="column" style="background-color:#ccc; height: 200px;">
+
+<!--***************************      Column 3     *************************-->
+    <div class="column-flex ad-column" style="background-color: #ccc;">
         <h2>Column 3</h2>
         <p>Ad's are going here...</p>
+        <br><br>
+        <p>Shweeeeeeeeeen!!!</p>
     </div>
 </div>
 

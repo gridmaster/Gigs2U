@@ -585,7 +585,7 @@ class Post {
 
 				//Prepare user_to string so it can be included even if not posted to a user
 				if($row['user_to_ID'] == "0") {
-					$user_to = "";
+					$user_to_ID = "";
 				}
 				else {
 					$user_to_obj = new User($this->con, $row['user_to_ID']);

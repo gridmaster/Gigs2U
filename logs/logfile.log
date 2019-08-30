@@ -73,3 +73,6 @@ ajax_load_messages
 userLoggedInID: 11
 ajax_load_messages
 userLoggedInID: 11
+ajax_load_messages
+userLoggedInID: 22
+INSERT INTO notifications VALUES('', '', '11', '', '22', 'Groovie And The Dingdongs  liked your post', 'post.php?id=177', '2019-08-24 02:04:53', 'no', 'no')
