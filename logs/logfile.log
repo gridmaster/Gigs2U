@@ -1,78 +1,56 @@
-body: qqqqqqqqqqq
-user_to_ID: 
-user_from_ID: 
-body: ???????????????
-user_to_ID: 22
-user_from_ID: 11
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='17' ORDER BY id DESC
-thisUserID: 17
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='13' ORDER BY id DESC
-thisUserID: 13
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='18' ORDER BY id DESC
-thisUserID: 18
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='16' ORDER BY id DESC
-thisUserID: 16
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='14' ORDER BY id DESC
-thisUserID: 14
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='15' ORDER BY id DESC
-thisUserID: 15
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='12' ORDER BY id DESC
-thisUserID: 12
+
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784'  WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784'  WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Cir.', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784'  WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+x 237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+237 Madison Circle Locust Grove, Virginia 22508 United States
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='5 Greystone Pl', Address_2='', City='Stafford', State='Virginia', Zip='22554', Country='United States', Province='', longitude='-77.44138', latitude='38.46525' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
+UPDATE address SET Address_1='5 Greystone Pl', Address_2='', City='Stafford', State='Virginia', Zip='22554', Country='United States', Province='', longitude='-77.44138', latitude='38.46525' WHERE memberID='11'
+UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
 ajax_load_messages
 userLoggedInID: 11
-SELECT user_to_ID, user_from_ID FROM messages WHERE memberID='11' OR user_from_ID='11' ORDER BY id DESC
-userLoggedInID: 11
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='17' ORDER BY id DESC
-thisUserID: 17
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='13' ORDER BY id DESC
-thisUserID: 13
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='18' ORDER BY id DESC
-thisUserID: 18
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='16' ORDER BY id DESC
-thisUserID: 16
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='14' ORDER BY id DESC
-thisUserID: 14
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='15' ORDER BY id DESC
-thisUserID: 15
-SELECT opened FROM messages WHERE user_to_ID='11' AND user_from_ID='12' ORDER BY id DESC
-thisUserID: 12
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-INSERT INTO notifications VALUES('', '', 17', '', 11', 'Jim Ballard liked your post', 'post.php?id=120', '2019-08-21 12:45:31', 'no', 'no')
-INSERT INTO notifications VALUES('', '', 17', '', '11', 'Jim Ballard liked your post', 'post.php?id=120', '2019-08-21 12:46:48', 'no', 'no')
-INSERT INTO notifications VALUES('', '', '17', '', '11', 'Jim Ballard liked your post', 'post.php?id=120', '2019-08-21 12:47:50', 'no', 'no')
-INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your post', 'post.php?id=163', '2019-08-21 12:50:50', 'no', 'no')
-INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your post', 'post.php?id=131', '2019-08-21 12:52:06', 'no', 'no')
-INSERT INTO notifications VALUES('', '', '17', '', '11', 'Jim Ballard liked your post', 'post.php?id=120', '2019-08-21 12:52:37', 'no', 'no')
-INSERT INTO notifications VALUES('', '', '11', '', '17', 'Marge Simpson liked your post', 'post.php?id=58', '2019-08-21 13:07:37', 'no', 'no')
-body: Jim to Marge's wall.
-user_to_ID: 17
-user_from_ID: 11
-ajax_load_messages
-userLoggedInID: 11
-INSERT INTO notifications VALUES('', '', '22', '', '11', 'Jim Ballard liked your post', 'post.php?id=141', '2019-08-21 22:17:18', 'no', 'no')
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 11
-ajax_load_messages
-userLoggedInID: 22
-INSERT INTO notifications VALUES('', '', '11', '', '22', 'Groovie And The Dingdongs  liked your post', 'post.php?id=177', '2019-08-24 02:04:53', 'no', 'no')

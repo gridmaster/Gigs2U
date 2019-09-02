@@ -5,14 +5,41 @@ if(isset($_POST['update_details'])) {
 	$last_name = $_POST['last_name'];
 	$email = $_POST['email'];
 
+	$address1 = $_POST['address1'];
+	$address2 = $_POST['address2'];
+	$city = $_POST['city'];
+	$state = $_POST['state'];
+	$zip = $_POST['zip'];
+	$country = $_POST['country'];
+	$province = $_POST['province'];
+	$latitude = $_POST['latitude'];
+	$longitude = $_POST['longitude'];
+
 	$email_check = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
 	$row = mysqli_fetch_array($email_check);
-	$matched_user_ID = $row['memberID'];
+	$matched_user_ID = $row['memberID']; 
 
 	if($matched_user_ID == "" || $matched_user_ID == $userLoggedInID) {
 		$message = "Details updated!<br><br>";
 
+		$url = "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion='$country'&locality='$city'&postalCode='$zip'&addressLine='$address1'&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA";
+
 		$query = mysqli_query($con, "UPDATE users SET first_name='$first_name', last_name='$last_name', email='$email' WHERE memberID='$userLoggedInID'");
+
+		$txt = "SELECT * FROM address WHERE MemberID='$userLoggedInID'";
+		$check_user_query = mysqli_query($con, $txt);
+	  	$nr = mysqli_num_rows($check_user_query);
+
+		if($check_user_query = mysqli_query($con, $txt)) {
+			$query = mysqli_query($con, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'");
+	
+		  	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+			fwrite($myfile, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'\n");
+			fclose($myfile);
+			}
+		else {
+			$query = mysqli_query($con, "INSERT INTO address VALUES ('', '$userLoggedInID', 'Home', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')");
+		}
 	}
 	else 
 		$message = "That email is already in use!<br><br>";

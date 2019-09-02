@@ -122,6 +122,13 @@ nav a:hover {
 	min-height: 170px;
 }
 
+.settings_column {
+	float: left;
+	width: 540px;
+	z-index: -1;
+	min-height: 170px;
+}
+
 .rightside_column {
 
 }

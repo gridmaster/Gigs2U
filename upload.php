@@ -35,7 +35,7 @@ if(isset($_FILES['image']['name'])){
         $file_name = $profile_id.'_temp.jpeg'; //$profile_id.'_temp.'.$type; // for the final resized image
         $fullpath_2 = $uploaddir."/".$file_name; //for the final resized image
     //Move the file to correct location
-        $move = move_uploaded_file($ImageTempName ,$fullpath) ; 
+        $move = move_uploaded_file($ImageTempName ,$fullpath); 
         chmod($fullpath, 0777);  
         //Check for valid uplaod
         if (!$move) { 
