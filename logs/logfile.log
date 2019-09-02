@@ -54,3 +54,7 @@ UPDATE address SET Address_1='5 Greystone Pl', Address_2='', City='Stafford', St
 UPDATE address SET Address_1='237 Madison Circle', Address_2='', City='Locust Grove', State='Virginia', Zip='22508', Country='United States', Province='', longitude='-77.76674', latitude='38.32784' WHERE memberID='11'
 ajax_load_messages
 userLoggedInID: 11
+SELECT COUNT(1) FROM address WHERE MemberID='11': SELECT COUNT(1) FROM address WHERE MemberID='11'
+UPDATE address SET Address_1='5 Greystone Pl', Address_2='', City='Stafford', State='Virginia', Zip='22554', Country='United States', Province='', longitude='-77.44138', latitude='38.46525' WHERE memberID='11'
+SELECT COUNT(1) FROM address WHERE MemberID='11': SELECT COUNT(1) FROM address WHERE MemberID='11'
+UPDATE address SET Address_1='5 Greystone Pl', Address_2='', City='Stafford', State='Virginia', Zip='22554', Country='United States', Province='', longitude='-77.44138000000000', latitude='38.46525000000000' WHERE memberID='11'

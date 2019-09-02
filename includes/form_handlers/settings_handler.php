@@ -28,17 +28,27 @@ if(isset($_POST['update_details'])) {
 
 		$txt = "SELECT * FROM address WHERE MemberID='$userLoggedInID'";
 		$check_user_query = mysqli_query($con, $txt);
-	  	$nr = mysqli_num_rows($check_user_query);
+		$row = mysqli_fetch_array($check_user_query);
+    	$matched_user_ID = $row['MemberID']; 
 
-		if($check_user_query = mysqli_query($con, $txt)) {
-			$query = mysqli_query($con, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'");
-	
-		  	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
-			fwrite($myfile, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'\n");
-			fclose($myfile);
+	  	//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+		//fwrite($myfile, "SELECT * FROM address WHERE MemberID='$userLoggedInID'\n");
+		//fwrite($myfile, "matched_user_ID: $matched_user_ID\n");				
+		//fclose($myfile);
+        		
+        if($matched_user_ID == "") {
+        		$query = mysqli_query($con, "INSERT INTO address VALUES ('', '$userLoggedInID', 'Home', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')");
+
+    		  	//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+    			//fwrite($myfile, "INSERT INTO address VALUES ('', '$userLoggedInID', 'Home', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')\n");
+        		//fclose($myfile);
 			}
 		else {
-			$query = mysqli_query($con, "INSERT INTO address VALUES ('', '$userLoggedInID', 'Home', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')");
+			$query = mysqli_query($con, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'");
+	
+		  	//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+			//fwrite($myfile, "UPDATE address SET Address_1='$address1', Address_2='$address2', City='$city', State='$state', Zip='$zip', Country='$country', Province='$province', longitude='$longitude', latitude='$latitude' WHERE memberID='$userLoggedInID'\n");
+    		//fclose($myfile);
 		}
 	}
 	else 
