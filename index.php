@@ -73,6 +73,20 @@ if(isset($_POST['post'])){
 		<div class="col-1-cont">
 			<div class="trends">
 				<div class="map_details column">
+					<?php
+						$user_data_query = mysqli_query($con, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'");
+						$row = mysqli_fetch_array($user_data_query);
+	  	
+						//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+						//fwrite($myfile, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'\n");
+						//fclose($myfile);
+
+						$longitude = $row['Longitude'];
+						$latitude = $row['Latitude']; 
+					?>
+					<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
+					<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
+					
 					<script type='text/javascript'>
 				    var map;
 
@@ -83,6 +97,19 @@ if(isset($_POST['post'])){
 				            var manager = new Microsoft.Maps.AutosuggestManager({ map: map });
 				            manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
 				        });
+
+					    //Request the user's location
+					    navigator.geolocation.getCurrentPosition(function (position) {
+					        var loc = new Microsoft.Maps.Location(
+					            $(".latitude").val(),
+					            $(".longitude").val());
+					        //Add a pushpin at the user's location.
+					        var pin = new Microsoft.Maps.Pushpin(loc);
+					        map.entities.push(pin);
+					        //Center the map on the user's location.
+					        map.setView({ center: loc, zoom: 15 });
+					    });
+
 				    }
 
 				    function selectedSuggestion(result) {
@@ -93,6 +120,15 @@ if(isset($_POST['post'])){
 				        var pin = new Microsoft.Maps.Pushpin(result.location);
 				        map.entities.push(pin);
 				        map.setView({ bounds: result.bestView });
+
+						var locate = JSON.stringify(result.location);
+						var latlong = JSON.parse(locate);
+
+						var latitude = latlong.latitude;
+						var longitude = latlong.longitude;
+
+						$(".latitude").val(latitude);
+						$(".longitude").val(longitude);
 				    }
 				    </script>
 				    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
@@ -134,6 +170,7 @@ if(isset($_POST['post'])){
     <div class="column-flex">
 		<form class="post_form" action="index.php" method="POST" enctype="multipart/form-data">
 			<input type="file" name="fileToUpload" id="fileToUpload">
+			<p></p>
 			<textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
 			<input type="submit" name="post" id="post_button" value="Post">
 			<hr>
