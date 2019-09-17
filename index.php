@@ -47,6 +47,8 @@ if(isset($_POST['post'])){
 
 ?>
 
+<link rel="stylesheet" type="text/css" href="assets/css/index.css">
+
 <!--*************************** Main page layout *************************-->
 <div class="row">
 <!--***************************      Column 1     *************************-->
@@ -134,7 +136,8 @@ if(isset($_POST['post'])){
 				    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
 				    <div id='searchBoxContainer'>
 				    	<!-- <label for="searchBox">Search: </label> -->
-			        	<input type='text' id='searchBox' style="margin-bottom: 5px; width: 100%;" placeholder="Search"/>
+			        	<input type='text' id='searchBox' style="margin-bottom: 5px; width: 79%;" placeholder="Search"/>
+			        	<input type="submit" name="post" id="event_button" data-toggle="modal"  value="Add event" data-target="#post_form">
 				    </div>
 
 				    <div id="myMap" style="position:relative;width:100%;height:300px;"></div>
@@ -144,7 +147,7 @@ if(isset($_POST['post'])){
 
 <!--************************      Column 1 Block 3    *********************-->	
 		<div class="col-1-cont">
-			<h4>Popular</h4>
+			<h4>What's going on!</h4>
 			<div class="trends">
 				<?php 
 				$query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
@@ -167,7 +170,7 @@ if(isset($_POST['post'])){
 	</div>
 
 <!--***************************      Column 2     *************************-->
-    <div class="column-flex">
+    <div class="column-flex" style="max-width: 560px;">
 		<form class="post_form" action="index.php" method="POST" enctype="multipart/form-data">
 			<input type="file" name="fileToUpload" id="fileToUpload">
 			<p></p>
@@ -193,6 +196,44 @@ if(isset($_POST['post'])){
         <br><br>
         <p>Shweeeeeeeeeen!!!</p>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="post_form" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="postModalLabel">What's happening!</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>This will appear on the map for all your friends and fans to see!</p>
+
+        <form class="profile_post" action="" method="POST">
+          <div class="form-group">
+	        <p></p>
+			Title of event: <input type="text" class="title" name="address1" value="<?php echo $title; ?>" id="settings_input"><br>
+			Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
+			Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
+			City: <input type="text" class="city" name="city" value="<?php echo $city; ?>" id="settings_input"><br>
+			State: <input type="text" class="state" name="state" value="<?php echo $state; ?>" id="settings_input"><br>
+			Zip: <input type="text" class="zip" name="zip" value="<?php echo $zip; ?>" id="settings_input"><br>
+			Country: <input type="text" class="country" name="country" value="<?php echo $country; ?>" id="settings_input"><br>
+			Province: <input type="text" class="province" name="province" value="<?php echo $province; ?>" id="settings_input"><br>
+            <input type="hidden" name="user_from_ID" value="<?php echo $userLoggedInID; ?>">
+            <input type="hidden" name="user_to_ID" value="<?php echo $profile_userID; ?>">
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" name="post_button" id="submit_profile_post">Post</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 	<script>

@@ -1,6 +1,5 @@
 <?php  
 include "includes/header.php";
-
 //$message_obj = new Message($con, $userLoggedInID);
 
 if(isset($_GET['profile_userID'])) {
@@ -44,13 +43,15 @@ if(isset($_POST['post_message'])) {
 }
 ?>
 
+<link rel="stylesheet" type="text/css" href="assets/css/profile.css">
+
 <!--*************************** Main page layout *************************-->
 <div class="row">
 <!--***************************      Column 1     *************************-->
 	<div class="column-flex" style="max-width: 188px;">
 		
 		<style type="text/css">
-		.wrapper {
+		.wrapper-1 {
 		  margin-left: 0px;
 		  padding-left: 0px;
 		}
@@ -107,7 +108,7 @@ if(isset($_POST['post_message'])) {
 	</div>
 
 <!--***************************      Column 2     *************************-->
-    <div class="column-flex">
+    <div class="column column-flex col-2">
 	<div class="main_column column">
 		
 		<div class="posts_area"></div>
@@ -125,70 +126,6 @@ if(isset($_POST['post_message'])) {
     </div>
 </div>
 
-
-<!--
-	<div class="main_column column">
-		
-		<div class="posts_area"></div>
-		<img id="loading" src="assets/images/icons/loading.gif">
-
-	</div>
-	<style type="text/css">
-	.wrapper {
-	  margin-left: 0px;
-	  padding-left: 0px;
-	}
-
-	</style>
-	  
-	 <div class="profile_left">
-	    <img src="<?php echo $user_array['profile_pic']; ?>">
-
-	    <div class="profile_info">
-	      <p><?php echo "Mem Type: " . $user_array['memberType']; ?></p><hr>
-	      <p><?php echo "Posts: " . $profile_user->getNumPosts(); ?></p>
-	      <p><?php echo "Likes: " . $profile_user->getNumLikes(); ?></p>
-	      <p><?php echo "Friends: " . $profile_user->getNumFriends() ?></p>
-	      <p><?php
-		    $logged_in_user_obj = new User($con, $userLoggedInID); 
-	        if($userLoggedInID != $profile_userID) {
-      			echo '<hr><p>';
-        		echo $logged_in_user_obj->getMutualFriends($profile_userID) . " Mutual friends";
-      			echo '<p>';
-    		}
-    	?>
-
-	    </div>
-	  	<form action="<?php echo $profile_userID; ?>" method="POST">
-			<?php
-			$profile_user_obj = new User($con, $profile_userID); 
-			if($profile_user_obj->isClosed()) {
-				//header("Location: user_closed.php");
-			}
-
-			$logged_in_user_obj = new User($con, $userLoggedInID); 
-
-			if($userLoggedInID != $profile_userID) {
-
-			if($logged_in_user_obj->isFriend($profile_userID)) {
-			  echo '<input type="submit" name="remove_friend" class="danger" value="Remove Friend"><br>';
-			}
-			else if ($logged_in_user_obj->didReceiveRequest($profile_userID)) {
-			  echo '<input type="submit" name="respond_request" class="warning" value="Respond to Request"><br>';
-			}
-			else if ($logged_in_user_obj->didSendRequest($profile_userID)) {
-			  echo '<input type="submit" name="" class="default" value="Request Sent"><br>';
-			}
-			else 
-			  echo '<input type="submit" name="add_friend" class="success" value="Add Friend"><br>';
-			}
-
-			?>
-	    </form>
-	        <input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_form" value="Post Something">
-
- 	</div>
--->
 <!-- Modal -->
 <div class="modal fade" id="post_form" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
   <div class="modal-dialog">
