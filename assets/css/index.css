@@ -2,3 +2,8 @@
 	margin-bottom: 5px; 
 	width: 20%;
 }
+
+.modal-backdrop {
+	z-index: -1;
+}
+

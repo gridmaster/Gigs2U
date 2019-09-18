@@ -47,7 +47,10 @@ if(isset($_POST['post'])){
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
+
+<script src="assets/js/jquery.datetimepicker.full.js"></script>
 
 <!--*************************** Main page layout *************************-->
 <div class="row">
@@ -215,6 +218,9 @@ if(isset($_POST['post'])){
           <div class="form-group">
 	        <p></p>
 			Title of event: <input type="text" class="title" name="address1" value="<?php echo $title; ?>" id="settings_input"><br>
+			Date of event: <input id="datetime">
+			<p></p>
+			<br>
 			Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
 			Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
 			City: <input type="text" class="city" name="city" value="<?php echo $city; ?>" id="settings_input"><br>
@@ -235,6 +241,12 @@ if(isset($_POST['post'])){
     </div>
   </div>
 </div>
+
+<script>
+	$("#datetime").datetimepicker({
+		step: 30
+	});
+</script>
 
 	<script>
 	var userLoggedInID = '<?php echo $userLoggedInID; ?>';
