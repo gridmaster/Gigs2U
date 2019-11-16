@@ -5,6 +5,8 @@ $message = "";
 
 if(isset($_POST['add_event'])) {
 
+	echo "<script type='text/javascript'>alert('BFD!!!');</script>";
+
 	$title = strip_tags($_POST['title']);	
 	$description = strip_tags($_POST['description']);	
 	$datetime = strip_tags($_POST['datetime']);
@@ -18,26 +20,35 @@ if(isset($_POST['add_event'])) {
 	$latitude = strip_tags($_POST['latitude']);
 	$longitude = strip_tags($_POST['longitude']);
 
-	$message = "Details updated!<br><br>";
+	$message = "Event added!<br><br>";
 	$new_Id = -1;
 
 	$url = "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion='$country'&locality='$city'&postalCode='$zip'&addressLine='$address1'&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA";
 
 	$txt = "SELECT * FROM address WHERE latitude='$latitude' AND longitude='$longitude'";
 	$check_user_query = mysqli_query($con, $txt);
+	$address_id = "";
+
+	//   echo "<script type='text/javascript'>alert();</script>";
 
     if(mysqli_num_rows($check_user_query) == 0) {
     		$query = mysqli_query($con, "INSERT INTO address VALUES ('', '$userLoggedInID', '2', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')");
 
     		$new_Id = mysqli_insert_id($con);
 	}
+	else {
+		// we need the address id if it exists
+		$row = mysqli_fetch_array($check_user_query);
+		$address_id = $row['AddressID'];
+		echo "<script type='text/javascript'>alert('$address_id');</script>";
+	}
 
 	if($new_Id > -1) {
-		$query = mysqli_query($con, "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$new_Id', '$datetime', '$datetime')");
+		$address_id = $new_Id;
 	}
-	else {
-		echo "<script type='text/javascript'>alert('WTF???');</script>";
-	}
+
+	$query = mysqli_query($con, "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$address_id', '$datetime', '$datetime')");
+	echo "<script type='text/javascript'>alert('$new_Id');</script>";
 }
 else 
 	$message = "";

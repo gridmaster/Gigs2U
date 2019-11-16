@@ -87,7 +87,7 @@ function selectedSuggestion(result) {
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 	?>
 
-	<form action="settings.php" method="POST">
+	<form action="events.php" method="POST">
 
 	    <div id='searchBoxContainer'>
 	    	<label for='searchBox'>Dynamic address search:</label>
@@ -100,7 +100,12 @@ function selectedSuggestion(result) {
 			<p></p>
 			<div id="searchResult" class="ui-widget" style="margin-top: 1em;">
         </div>
-        
+
+		Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
+		Date of event: <input id="datetime" name="datetime">
+		<br>
+		<br>
+		Description: <textarea type="text" class="description" name="description" value="<?php echo $description; ?>" id="description"></textarea><br><br>
         <p></p>
 		Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
 		Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
@@ -114,7 +119,8 @@ function selectedSuggestion(result) {
 		Latitude: <input type="text" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input"><br>
 		<?php echo $message; ?>
 
-		<input type="submit" name="update_details" id="update_details" value="Update Details" class="info settings_submit">
+		<input type="submit" name="add_event" value="Add event" class="info settings_submit">
+		<!-- <input type="submit" name="update_details" id="update_details" value="Update Details" class="info settings_submit"> -->
 	</form>
 	<hr>
 

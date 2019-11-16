@@ -90,16 +90,11 @@ else {
 				echo $user['first_name']; 
 			}
 			?>
+			
 			</a>
 			<a href="events.php">
-				<i class="fa fa-map fa-lg"></i>
+				<i class="fa fa-globe fa-lg"></i>
 			</a>
-<!--		<a href="index.php">
-				<i class="fa fa-microphone"></i>
-			</a>
-			<a href="index.php">
-				<i class="fa fa-calendar fa-lg"></i>
-			</a> -->
 			<a href="index.php">
 				<i class="fa fa-home fa-lg"></i>
 			</a>			
