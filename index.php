@@ -64,18 +64,14 @@ include("includes/form_handlers/index_handler.php");
         map.entities.push(pin);
         map.setView({ bounds: result.bestView });
 
-
-	var address = JSON.stringify(result.address);
-	var addr = JSON.parse(address);
+		var address = JSON.stringify(result.address);
+		var addr = JSON.parse(address);
 
 		var locate = JSON.stringify(result.location);
 		var latlong = JSON.parse(locate);
 
 		var latitude = latlong.latitude;
 		var longitude = latlong.longitude;
-
-		$(".latitude").val(latitude);
-		$(".longitude").val(longitude);
 
 		$(".address1").val(addr.addressLine);
 		$(".city").val(addr.locality);
@@ -118,44 +114,42 @@ include("includes/form_handlers/index_handler.php");
 
 <!--************************      Column 1 Block 2    *********************-->	
 		<div class="col-1-cont">
-			<div class="trends">
-				<div class="map_details column">
-					<?php
-						$user_data_query = mysqli_query($con, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'");
-						$row = mysqli_fetch_array($user_data_query);
-	  	
-						//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
-						//fwrite($myfile, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'\n");
-						//fclose($myfile);
+			<div class="map_details column">
+				<?php
+					$user_data_query = mysqli_query($con, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'");
+					$row = mysqli_fetch_array($user_data_query);
+  	
+					//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+					//fwrite($myfile, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'\n");
+					//fclose($myfile);
 
-						$longitude = $row['Longitude'];
-						$latitude = $row['Latitude']; 
-					?>
-					<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
-					<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
+					$longitude = $row['Longitude'];
+					$latitude = $row['Latitude']; 
+				?>
+				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
+				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
 
-				    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
+			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
 <!-- 				    
-				    <div id='searchBoxContainer'> -->
-				    	<!-- <label for="searchBox">Search: </label> -->
+			    <div id='searchBoxContainer'> -->
+			    	<!-- <label for="searchBox">Search: </label> -->
 <!-- 			        	<input type='text' id='searchBox' style="margin-bottom: 5px; width: 100%;" placeholder="Search"/>
-			        	
-				    </div>  -->
-					
-					<div id='searchBoxContainer'>
-	    				<label for='searchBox'>Dynamic address search:</label>
+		        	
+			    </div>  -->
+				
+				<div id='searchBoxContainer'>
+    				<label for='searchBox'>Dynamic address search:</label>
 
-	        			<input type='text' id='searchBox' style="width: 100%;" value="<?php echo $search; ?>">
-	        			<p></p>
-	    			</div>
+        			<input type='text' id='searchBox' style="width: 100%;" value="<?php echo $search; ?>">
+        			<p></p>
+    			</div>
 
-				    <div id="myMap" style="position:relative; width:400px; height:300px;"></div>
-						<p></p>
-						<div id="searchResult" class="ui-widget" style="margin-top: 1em;">
-			        </div>
+			    <div id="myMap" style="position:relative; width:400px; height:300px;"></div>
+					<p></p>
+					<div id="searchResult" class="ui-widget" style="margin-top: 1em;">
+		        </div>
 
 <!--				    <div id="myMap" style="position:relative;width:100%;height:300px;"></div> -->
-				</div>
 			</div>
 		</div>
 
@@ -235,7 +229,7 @@ include("includes/form_handlers/index_handler.php");
 <!--***************************      Column 3     *************************-->
     <div class="column-flex ad-column" style="background-color: #ccc;">
         <h2>Column 3</h2>
-        <p>Ad's are going here...</p>
+        <p>Ad's are going here...</p> 
         <br><br>
         <p>Shweeeeeeeeeen!!!</p>
     </div>

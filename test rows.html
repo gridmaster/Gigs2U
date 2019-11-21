@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="assets/css/index.css">
+<!--*************************** Main page layout *************************-->
+<div class="row">
+<!--***************************      Column 1     *************************-->
+	<div class="column-flex column-one">
+		
+<!--************************      Column 1 Block 1    *********************-->	
+		<div class="col-1-cont-top">
+			<a href="#"> <img src="<?php echo $user['profile_pic']; ?>">a picture</a>
+
+			<div class="user_details_left_right">
+				<a href="<?php echo $userLoggedInID; ?>">
+					Click me!
+				</a>
+			</div>
+		</div>
+
+<!--************************      Column 1 Block 2    *********************-->	
+		<div class="col-1-cont">
+			<div class="trends">
+				<div class="map_details column">
+					
+					<div id='searchBoxContainer'>
+	    				<label for='searchBox'>Dynamic address search:</label>
+
+	        			<input type='text' id='searchBox' style="width: 100%;" value="<?php echo $search; ?>">
+	        			<p></p>
+	    			</div>
+				</div>
+			</div>
+		</div>
+
+<!--************************      Column 1 Block 3    *********************-->
+
+		<div class="col-1-cont">
+			<h4>What's going on! Post an event here!</h4>
+			<!-- <input type="submit" name="post" id="event_button" data-toggle="modal"  value="Add event" data-target="#post_form"> -->
+			<form action="index.php" method="POST">
+				<div class="form-group">
+					<input type="submit" name="add_event" value="Add event" class="info settings_submit">
+			        <p></p>
+					Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
+					Date of event: <input id="datetime" name="datetime">
+         		</div>
+			</form>
+		</div>
+	</div>
+
+<!--***************************      Column 2     *************************-->
+    <div class="column-flex" style="max-width: 560px;">
+		<form class="post_form" action="index.php" method="POST" enctype="multipart/form-data">
+			<input type="file" name="fileToUpload" id="fileToUpload">
+			<hr>
+		</form>
+    </div>
+
+<!--***************************      Column 3     *************************-->
+    <div class="column-flex ad-column" style="background-color: #ccc;">
+        <h2>Column 3</h2>
+        <p>Ad's are going here...</p> 
+        <br><br>
+        <p>Shweeeeeeeeeen!!!</p>
+    </div>
+</div>

@@ -5,8 +5,6 @@ $message = "";
 
 if(isset($_POST['add_event'])) {
 
-	echo "<script type='text/javascript'>alert('BFD!!!');</script>";
-
 	$title = strip_tags($_POST['title']);	
 	$description = strip_tags($_POST['description']);	
 	$datetime = strip_tags($_POST['datetime']);
@@ -40,7 +38,7 @@ if(isset($_POST['add_event'])) {
 		// we need the address id if it exists
 		$row = mysqli_fetch_array($check_user_query);
 		$address_id = $row['AddressID'];
-		echo "<script type='text/javascript'>alert('$address_id');</script>";
+		//echo "<script type='text/javascript'>alert('$address_id');</script>";
 	}
 
 	if($new_Id > -1) {
@@ -48,9 +46,9 @@ if(isset($_POST['add_event'])) {
 	}
 
 	$query = mysqli_query($con, "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$address_id', '$datetime', '$datetime')");
-	echo "<script type='text/javascript'>alert('$new_Id');</script>";
 }
-else 
+else {
 	$message = "";
+}
 
 ?>

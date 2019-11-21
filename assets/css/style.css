@@ -90,7 +90,8 @@ nav a:hover {
 .user_details {
 	width: 20%;
 	float: left;
-	margin: 10px;
+    margin-right: 10;
+    border-radius: 5px;
 	border-width: 2px;
 	border-color: #eee;
 
@@ -139,15 +140,14 @@ nav a:hover {
 }
 
 .ad-column {
-	height: 200px;
-	max-width: 220px;"
+	
+	max-width: 280px;"
 }
 
 .column-one {
 	background-color: #E6EAE8;
 	max-width: 560px;
 	min-width: 454px;
-	height: 760px;
 }
 
 .column-flex {
