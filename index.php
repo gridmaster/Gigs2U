@@ -12,15 +12,15 @@ include("includes/form_handlers/index_handler.php");
 
 	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE memberID='$userLoggedInID'");
 	$row = mysqli_fetch_array($user_data_query);
-	$address1 = $row['Address_1'];
-	$address2 = $row['Address_2'];
-	$city = $row['City'];
-	$state = $row['State'];
-	$zip = $row['Zip'];
-	$country = $row['Country'];
-	$province = $row['Province'];
-	$longitude = $row['Longitude'];
-	$latitude = $row['Latitude'];
+	$address1 = $row['address_1'];
+	$address2 = $row['address_2'];
+	$city = $row['city'];
+	$state = $row['state'];
+	$zip = $row['zip'];
+	$country = $row['country'];
+	$province = $row['province'];
+	$longitude = $row['longitude'];
+	$latitude = $row['latitude'];
 
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 
