@@ -156,7 +156,7 @@ function selectedSuggestion(result) {
 			<div class="map_details column">
 
 				<?php
-					$event_query = mysqli_query($con, "SELECT * FROM `events` ORDER BY start_date DESC LIMIT 1");
+				 $event_query = mysqli_query($con, "SELECT * FROM `events` ORDER BY start_date DESC LIMIT 1");
 				$row = mysqli_fetch_array($event_query);
 
 				$address_id = $row['address_id'];
@@ -176,7 +176,7 @@ function selectedSuggestion(result) {
 				$longitude = $row['longitude'];
 				$latitude = $row['latitude'];
 				?>
-				
+
 				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
 				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
 
