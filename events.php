@@ -156,7 +156,7 @@ function selectedSuggestion(result) {
 			<div class="map_details column">
 
 				<?php
-				 $event_query = mysqli_query($con, "SELECT * FROM `events` ORDER BY start_date DESC LIMIT 1");
+				 $event_query = mysqli_query($con, "SELECT * FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
 				$row = mysqli_fetch_array($event_query);
 
 				$address_id = $row['address_id'];
@@ -175,6 +175,8 @@ function selectedSuggestion(result) {
 				$province = $row['province'];
 				$longitude = $row['longitude'];
 				$latitude = $row['latitude'];
+
+				$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 				?>
 
 				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
@@ -224,15 +226,41 @@ function selectedSuggestion(result) {
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 	?>
 -->
+
+				<?php
+				 $event_query = mysqli_query($con, "SELECT * FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
+				$row = mysqli_fetch_array($event_query);
+
+				$address_id = $row['address_id'];
+				$title = $row['title'];
+				$start_date = $row['start_date'];
+				$description = $row['description'];
+
+				$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
+				$row = mysqli_fetch_array($user_data_query);
+				$address1 = $row['address_1'];
+				$address2 = $row['address_2'];
+				$city = $row['city'];
+				$state = $row['state'];
+				$zip = $row['zip'];
+				$country = $row['country'];
+				$province = $row['province'];
+				$longitude = $row['longitude'];
+				$latitude = $row['latitude'];
+
+				$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
+				?>
+
 	<form action="events.php" method="POST">
 		<h4 style="text-align: center;">What's going on???</h4>
 		<h4 style="text-align: center;">Enter an event here!</h4>
 		<hr>
 		Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
-		Date of event: <input id="datetime" name="datetime">
+		Date of event: <input id="datetime" name="datetime" value="<?php echo $start_date; ?>" >
 		<br>
 		<br>
-		Description: <textarea type="text" class="description" name="description" style="width: 280px; height: 60px;" value="<?php echo $description; ?>" id="description"></textarea><br><br>
+
+		Description: <textarea name="description" style="width: 280px; height: 60px;"><?php echo $description; ?></textarea><br><br>
         <p></p>
 		Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
 		Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
