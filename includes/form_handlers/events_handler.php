@@ -37,7 +37,7 @@ if(isset($_POST['add_event'])) {
 	else {
 		// we need the address id if it exists
 		$row = mysqli_fetch_array($check_user_query);
-		$address_id = $row['AddressID'];
+		$address_id = $row['addressID'];
 		//echo "<script type='text/javascript'>alert('$address_id');</script>";
 	}
 

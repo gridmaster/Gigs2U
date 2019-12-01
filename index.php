@@ -10,7 +10,7 @@ include("includes/form_handlers/index_handler.php");
 	$last_name = $row['last_name'];
 	$email = $row['email'];
 
-	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE memberID='$userLoggedInID'");
+	$user_data_query = mysqli_query($con, "SELECT * FROM address a JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1");
 	$row = mysqli_fetch_array($user_data_query);
 	$address1 = $row['address_1'];
 	$address2 = $row['address_2'];
@@ -116,12 +116,8 @@ include("includes/form_handlers/index_handler.php");
 		<div class="col-1-cont">
 			<div class="map_details column">
 				<?php
-					$user_data_query = mysqli_query($con, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'");
+					$user_data_query = mysqli_query($con, "SELECT Longitude, Latitude FROM address a JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1");
 					$row = mysqli_fetch_array($user_data_query);
-  	
-					//$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
-					//fwrite($myfile, "SELECT Longitude, Latitude FROM address WHERE memberID='$userLoggedInID'\n");
-					//fclose($myfile);
 
 					$longitude = $row['Longitude'];
 					$latitude = $row['Latitude']; 
@@ -130,12 +126,6 @@ include("includes/form_handlers/index_handler.php");
 				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
 
 			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
-<!-- 				    
-			    <div id='searchBoxContainer'> -->
-			    	<!-- <label for="searchBox">Search: </label> -->
-<!-- 			        	<input type='text' id='searchBox' style="margin-bottom: 5px; width: 100%;" placeholder="Search"/>
-		        	
-			    </div>  -->
 				
 				<div id='searchBoxContainer'>
     				<label for='searchBox'>Dynamic address search:</label>
@@ -148,37 +138,47 @@ include("includes/form_handlers/index_handler.php");
 					<p></p>
 					<div id="searchResult" class="ui-widget" style="margin-top: 1em;">
 		        </div>
-
-<!--				    <div id="myMap" style="position:relative;width:100%;height:300px;"></div> -->
 			</div>
 		</div>
 
 <!--************************      Column 1 Block 3    *********************-->
-	<?php
-	$user_data_query = mysqli_query($con, "SELECT first_name, last_name, email FROM users WHERE memberID='$userLoggedInID'");
-	$row = mysqli_fetch_array($user_data_query);
 
-	$first_name = $row['first_name'];
-	$last_name = $row['last_name'];
-	$email = $row['email'];
+      <div class="col-1-cont" style="width: 220px;">
 
-	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE memberID='$userLoggedInID'");
-	$row = mysqli_fetch_array($user_data_query);
-	$address1 = $row['Address_1'];
-	$address2 = $row['Address_2'];
-	$city = $row['City'];
-	$state = $row['State'];
-	$zip = $row['Zip'];
-	$country = $row['Country'];
-	$province = $row['Province'];
-	$longitude = $row['Longitude'];
-	$latitude = $row['Latitude'];
+		<h4 style="text-align: center;">Upcoming Events!</h4>
+		<hr>
+		<div class="trends">
+			<?php 
 
-	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
-	?> 
+    		$query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events WHERE start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
+
+			foreach ($query as $row) {
+				
+				$word = $row['title'];
+				$word_dot = strlen($word) >= 14 ? "..." : "";
+
+				$trimmed_word = str_split($word, 14);
+				$trimmed_word = $trimmed_word[0];
+
+				echo "<div style'padding: 1px'>";
+				echo "<p><b>";
+				echo $row['title'];
+				echo "</b></p><p>";
+				echo $row['start_date'];
+				echo "</p><p>";
+				echo $row['description'];
+				echo "</p>";
+				echo "</div><hr>";
+			}
+			?>
+		</div>
+      </div>
+
+
+<!--
 		<div class="col-1-cont">
 			<h4>What's going on! Post an event here!</h4>
-			<!-- <input type="submit" name="post" id="event_button" data-toggle="modal"  value="Add event" data-target="#post_form"> -->
+			
 			<form action="index.php" method="POST">
 				<div class="form-group">
 					<input type="submit" name="add_event" value="Add event" class="info settings_submit">
@@ -204,6 +204,7 @@ include("includes/form_handlers/index_handler.php");
          		</div>
 			</form>
 		</div>
+-->
 	</div>
 
 <!--***************************      Column 2     *************************-->

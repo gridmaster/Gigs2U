@@ -10,7 +10,7 @@ include("includes/form_handlers/events_handler.php");
 	$last_name = $row['last_name'];
 	$email = $row['email'];
 
-	$event_query = mysqli_query($con, "SELECT * FROM `events` ORDER BY start_date DESC LIMIT 1");
+	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events WHERE start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 	$row = mysqli_fetch_array($event_query);
 
 	$address_id = $row['address_id'];
@@ -23,7 +23,7 @@ include("includes/form_handlers/events_handler.php");
 	$address1 = $row['address_1'];
 	$address2 = $row['address_2'];
 	$city = $row['city'];
-	$state = $row['state'];
+	$state = $row['state']; 
 	$zip = $row['zip'];
 	$country = $row['country'];
 	$province = $row['province'];
@@ -92,11 +92,11 @@ function selectedSuggestion(result) {
     }
 </script>
 
-<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>
-
 <link rel="stylesheet" href="assets/css/index.css">
 <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
 <script src="assets/js/jquery.datetimepicker.full.js"></script>
+
+<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>
 
 <!--*************************** Main page layout *************************-->
 <div class="row">
@@ -156,23 +156,17 @@ function selectedSuggestion(result) {
 			<div class="map_details column">
 
 				<?php
-				 $event_query = mysqli_query($con, "SELECT * FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
+
+				$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1");
+
+
+				// $event_query = mysqli_query($con, "SELECT address_id FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
 				$row = mysqli_fetch_array($event_query);
 
-				$address_id = $row['address_id'];
-				$title = $row['title'];
-				$start_date = $row['start_date'];
-				$description = $row['description'];
+				//$address_id = $row['address_id'];
 
-				$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
-				$row = mysqli_fetch_array($user_data_query);
-				$address1 = $row['address_1'];
-				$address2 = $row['address_2'];
-				$city = $row['city'];
-				$state = $row['state'];
-				$zip = $row['zip'];
-				$country = $row['country'];
-				$province = $row['province'];
+				//$user_data_query = mysqli_query($con, "SELECT longitude,latitude FROM address WHERE addressID='$address_id'");
+				//$row = mysqli_fetch_array($user_data_query);
 				$longitude = $row['longitude'];
 				$latitude = $row['latitude'];
 
@@ -201,55 +195,30 @@ function selectedSuggestion(result) {
 <!--***************************      Column 3     *************************-->
       <div class="column column-flex col-2" style="min-width: 340px; max-width: 340px">
 		<div class="col-1-cont" style="margin: 0 auto; width: 300px;">
-<!--
-	<?php
 
-	$user_data_query = mysqli_query($con, "SELECT first_name, last_name, email FROM users WHERE memberID='$userLoggedInID'");
-	$row = mysqli_fetch_array($user_data_query);
+		<?php
+		 $event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='11' AND at.default_address = 1");
+		$row = mysqli_fetch_array($event_query);
 
-	$first_name = $row['first_name'];
-	$last_name = $row['last_name'];
-	$email = $row['email'];
+		$address_id = $row['address_id'];
+		$title = $row['title'];
+		$start_date = $row['start_date'];
+		$description = $row['description'];
 
-	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE memberID='$userLoggedInID' AND address_type=1");
-	$row = mysqli_fetch_array($user_data_query);
-	$address1 = $row['Address_1'];
-	$address2 = $row['Address_2'];
-	$city = $row['City'];
-	$state = $row['State'];
-	$zip = $row['Zip'];
-	$country = $row['Country'];
-	$province = $row['Province'];
-	$longitude = $row['Longitude'];
-	$latitude = $row['Latitude'];
+		$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
+		$row = mysqli_fetch_array($user_data_query);
+		$address1 = $row['address_1'];
+		$address2 = $row['address_2'];
+		$city = $row['city'];
+		$state = $row['state'];
+		$zip = $row['zip'];
+		$country = $row['country'];
+		$province = $row['province'];
+		$longitude = $row['longitude'];
+		$latitude = $row['latitude'];
 
-	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
-	?>
--->
-
-				<?php
-				 $event_query = mysqli_query($con, "SELECT * FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
-				$row = mysqli_fetch_array($event_query);
-
-				$address_id = $row['address_id'];
-				$title = $row['title'];
-				$start_date = $row['start_date'];
-				$description = $row['description'];
-
-				$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
-				$row = mysqli_fetch_array($user_data_query);
-				$address1 = $row['address_1'];
-				$address2 = $row['address_2'];
-				$city = $row['city'];
-				$state = $row['state'];
-				$zip = $row['zip'];
-				$country = $row['country'];
-				$province = $row['province'];
-				$longitude = $row['longitude'];
-				$latitude = $row['latitude'];
-
-				$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
-				?>
+		$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
+		?>
 
 	<form action="events.php" method="POST">
 		<h4 style="text-align: center;">What's going on???</h4>
