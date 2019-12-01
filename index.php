@@ -86,9 +86,6 @@ include("includes/form_handlers/index_handler.php");
 </script>
 
 <link rel="stylesheet" href="assets/css/index.css">
-<link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
-
-<script src="assets/js/jquery.datetimepicker.full.js"></script>
 
 <!--*************************** Main page layout *************************-->
 <div class="row">
@@ -125,8 +122,6 @@ include("includes/form_handlers/index_handler.php");
 				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
 				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
 
-			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
-				
 				<div id='searchBoxContainer'>
     				<label for='searchBox'>Dynamic address search:</label>
 
@@ -143,14 +138,14 @@ include("includes/form_handlers/index_handler.php");
 
 <!--************************      Column 1 Block 3    *********************-->
 
-      <div class="col-1-cont" style="width: 220px;">
+      <div class="col-1-cont">
 
 		<h4 style="text-align: center;">Upcoming Events!</h4>
 		<hr>
 		<div class="trends">
 			<?php 
 
-    		$query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events WHERE start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
+    		$query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
 
 			foreach ($query as $row) {
 				
@@ -159,7 +154,7 @@ include("includes/form_handlers/index_handler.php");
 
 				$trimmed_word = str_split($word, 14);
 				$trimmed_word = $trimmed_word[0];
-
+				$start_date = $row['start_date'];
 				echo "<div style'padding: 1px'>";
 				echo "<p><b>";
 				echo $row['title'];
@@ -173,38 +168,6 @@ include("includes/form_handlers/index_handler.php");
 			?>
 		</div>
       </div>
-
-
-<!--
-		<div class="col-1-cont">
-			<h4>What's going on! Post an event here!</h4>
-			
-			<form action="index.php" method="POST">
-				<div class="form-group">
-					<input type="submit" name="add_event" value="Add event" class="info settings_submit">
-
-			        <p></p>
-					Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
-					Date of event: <input id="datetime" name="datetime">
-					<br>
-					<br>
-					Description: <textarea type="text" class="description" name="description" value="<?php echo $description; ?>" id="description"></textarea><br><br>
-
-					Address 1: <input type="text" class="address" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
-					Address 2: <input type="text" class="address" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
-					City: <input type="text" class="city address" name="city" value="<?php echo $city; ?>" id="settings_input"><br>
-					State: <input type="text" class="state address" name="state" value="<?php echo $state; ?>" id="settings_input"><br>
-					Zip: <input type="text" class="zip address" name="zip" value="<?php echo $zip; ?>" id="settings_input"><br>
-					Country: <input type="text" class="country address" name="country" value="<?php echo $country; ?>" id="settings_input"><br>
-					Province: <input type="text" class="province address" name="province" value="<?php echo $province; ?>" id="settings_input"><br>
-					Longitude: <input type="text" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input"><br>
-					Latitude: <input type="text" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input"><br>
-		            <input type="hidden" name="user_from_ID" value="<?php echo $userLoggedInID; ?>">
-		            <input type="hidden" name="user_to_ID" value="<?php echo $profile_userID; ?>">
-         		</div>
-			</form>
-		</div>
--->
 	</div>
 
 <!--***************************      Column 2     *************************-->

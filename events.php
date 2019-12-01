@@ -38,7 +38,7 @@ include("includes/form_handlers/events_handler.php");
 ?>
 
 <script type='text/javascript'>
-var map;
+	var map;
 
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {});
@@ -63,40 +63,36 @@ var map;
     }
 
 
-function selectedSuggestion(result) {
-    //Remove previously selected suggestions from the map.
-    map.entities.clear();
+	function selectedSuggestion(result) {
+	    //Remove previously selected suggestions from the map.
+	    map.entities.clear();
 
-    //Show the suggestion as a pushpin and center map over it.
-    var pin = new Microsoft.Maps.Pushpin(result.location);
-    map.entities.push(pin);
-    map.setView({ bounds: result.bestView });
+	    //Show the suggestion as a pushpin and center map over it.
+	    var pin = new Microsoft.Maps.Pushpin(result.location);
+	    map.entities.push(pin);
+	    map.setView({ bounds: result.bestView });
 
-	var address = JSON.stringify(result.address);
-	var addr = JSON.parse(address);
+		var address = JSON.stringify(result.address);
+		var addr = JSON.parse(address);
 
-	var locate = JSON.stringify(result.location);
-	var latlong = JSON.parse(locate);
+		var locate = JSON.stringify(result.location);
+		var latlong = JSON.parse(locate);
 
-	var latitude = latlong.latitude;
-	var longitude = latlong.longitude;
+		var latitude = latlong.latitude;
+		var longitude = latlong.longitude;
 
-	$(".address1").val(addr.addressLine);
-	$(".city").val(addr.locality);
-	$(".state").val(addr.adminDistrict);
-	$(".country").val(addr.countryRegion);
-	$(".zip").val(addr.postalCode);
-	$(".province").val(addr.countryRegionIS02);
-	$(".latitude").val(latitude);
-	$(".longitude").val(longitude);
+		$(".address1").val(addr.addressLine);
+		$(".city").val(addr.locality);
+		$(".state").val(addr.adminDistrict);
+		$(".country").val(addr.countryRegion);
+		$(".zip").val(addr.postalCode);
+		$(".province").val(addr.countryRegionIS02);
+		$(".latitude").val(latitude);
+		$(".longitude").val(longitude);
     }
 </script>
 
 <link rel="stylesheet" href="assets/css/index.css">
-<link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
-<script src="assets/js/jquery.datetimepicker.full.js"></script>
-
-<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>
 
 <!--*************************** Main page layout *************************-->
 <div class="row">
@@ -111,7 +107,7 @@ function selectedSuggestion(result) {
 		<div class="trends">
 			<?php 
 
-    		$query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events WHERE start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
+    		$query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
 
 			foreach ($query as $row) {
 				
@@ -156,17 +152,10 @@ function selectedSuggestion(result) {
 			<div class="map_details column">
 
 				<?php
+				$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 
-				$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1");
-
-
-				// $event_query = mysqli_query($con, "SELECT address_id FROM `events` WHERE start_date >= NOW() ORDER BY start_date ASC LIMIT 1");
 				$row = mysqli_fetch_array($event_query);
 
-				//$address_id = $row['address_id'];
-
-				//$user_data_query = mysqli_query($con, "SELECT longitude,latitude FROM address WHERE addressID='$address_id'");
-				//$row = mysqli_fetch_array($user_data_query);
 				$longitude = $row['longitude'];
 				$latitude = $row['latitude'];
 
@@ -176,7 +165,7 @@ function selectedSuggestion(result) {
 				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
 				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
 
-			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>			
+			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>
 
 				<div id='searchBoxContainer'>
     				<label for='searchBox'>Dynamic address search:</label>
@@ -197,7 +186,7 @@ function selectedSuggestion(result) {
 		<div class="col-1-cont" style="margin: 0 auto; width: 300px;">
 
 		<?php
-		 $event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='11' AND at.default_address = 1");
+		$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 		$row = mysqli_fetch_array($event_query);
 
 		$address_id = $row['address_id'];
@@ -220,10 +209,11 @@ function selectedSuggestion(result) {
 		$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 		?>
 
-	<form action="events.php" method="POST">
 		<h4 style="text-align: center;">What's going on???</h4>
 		<h4 style="text-align: center;">Enter an event here!</h4>
 		<hr>
+
+	<form action="events.php" method="POST">
 		Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
 		Date of event: <input id="datetime" name="datetime" value="<?php echo $start_date; ?>" >
 		<br>
@@ -261,3 +251,9 @@ function selectedSuggestion(result) {
 		</div>
     </div>
 </div>
+
+<script>
+	$("#datetime").datetimepicker({
+		step: 30
+	});
+</script>
