@@ -129,7 +129,7 @@ include("includes/form_handlers/index_handler.php");
         			<p></p>
     			</div>
 
-			    <div id="myMap" style="position:relative; width:400px; height:300px;"></div>
+			    <div id="myMap" style="position:relative; height:300px;"></div>
 					<p></p>
 					<div id="searchResult" class="ui-widget" style="margin-top: 1em;">
 		        </div>
