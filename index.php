@@ -137,7 +137,6 @@ include("includes/form_handlers/index_handler.php");
 		</div>
 
 <!--************************      Column 1 Block 3    *********************-->
-
       <div class="col-1-cont">
 
 		<h4 style="text-align: center;">Upcoming Events!</h4>

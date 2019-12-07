@@ -10,7 +10,7 @@ include("includes/form_handlers/events_handler.php");
 	$last_name = $row['last_name'];
 	$email = $row['email'];
 
-	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events WHERE start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
+	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 	$row = mysqli_fetch_array($event_query);
 
 	$address_id = $row['address_id'];
@@ -29,7 +29,7 @@ include("includes/form_handlers/events_handler.php");
 	$province = $row['province'];
 	$longitude = $row['longitude'];
 	$latitude = $row['latitude'];
-
+echo "<script type='text/javascript'>alert('$latitude');</script>";
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 
 	$title = "";
@@ -53,6 +53,14 @@ include("includes/form_handlers/events_handler.php");
 	        var loc = new Microsoft.Maps.Location(
 	            $(".latitude").val(),
 	            $(".longitude").val());
+
+			alert(loc);
+	        //Add a pushpin at the user's location.
+	        var pin = new Microsoft.Maps.Pushpin(loc);
+	        map.entities.push(pin);
+	        var loc = new Microsoft.Maps.Location(
+	            "38.34805",
+	            "-77.76801");
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
@@ -80,7 +88,7 @@ include("includes/form_handlers/events_handler.php");
 
 		var latitude = latlong.latitude;
 		var longitude = latlong.longitude;
-
+alert(latitude + " " + longitude + " hey dude");
 		$(".address1").val(addr.addressLine);
 		$(".city").val(addr.locality);
 		$(".state").val(addr.adminDistrict);
@@ -119,7 +127,8 @@ include("includes/form_handlers/events_handler.php");
 
 				echo "<div style'padding: 1px'>";
 				echo "<p><b>";
-				echo $row['title'];
+				echo "<a href='$word'>$word</a>";
+
 				echo "</b></p><p>";
 				echo $row['start_date'];
 				echo "</p><p>";
