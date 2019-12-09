@@ -29,7 +29,7 @@ include("includes/form_handlers/events_handler.php");
 	$province = $row['province'];
 	$longitude = $row['longitude'];
 	$latitude = $row['latitude'];
-echo "<script type='text/javascript'>alert('$latitude');</script>";
+
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 
 	$title = "";
@@ -54,10 +54,12 @@ echo "<script type='text/javascript'>alert('$latitude');</script>";
 	            $(".latitude").val(),
 	            $(".longitude").val());
 
-			alert(loc);
+			//alert(loc);
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
+	        alert(map.getBounds());
+	        map.entities.push(Microsoft.Maps.TestDataGenerator.getPushpins(8, map.getBounds()));
 	        var loc = new Microsoft.Maps.Location(
 	            "38.34805",
 	            "-77.76801");
@@ -65,7 +67,7 @@ echo "<script type='text/javascript'>alert('$latitude');</script>";
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
 	        //Center the map on the user's location.
-	        map.setView({ center: loc, zoom: 15 });
+	        map.setView({ center: loc, zoom: 12 });
 	    });
 
     }
@@ -88,7 +90,7 @@ echo "<script type='text/javascript'>alert('$latitude');</script>";
 
 		var latitude = latlong.latitude;
 		var longitude = latlong.longitude;
-alert(latitude + " " + longitude + " hey dude");
+
 		$(".address1").val(addr.addressLine);
 		$(".city").val(addr.locality);
 		$(".state").val(addr.adminDistrict);
@@ -194,7 +196,7 @@ alert(latitude + " " + longitude + " hey dude");
       <div class="column column-flex col-2" style="min-width: 340px; max-width: 340px">
 		<div class="col-1-cont" style="margin: 0 auto; width: 300px;">
 
-		<?php
+<!--		<?php
 		$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 		$row = mysqli_fetch_array($event_query);
 
@@ -217,7 +219,7 @@ alert(latitude + " " + longitude + " hey dude");
 
 		$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 		?>
-
+--> 
 		<h4 style="text-align: center;">What's going on???</h4>
 		<h4 style="text-align: center;">Enter an event here!</h4>
 		<hr>
