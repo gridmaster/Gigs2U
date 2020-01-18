@@ -20,7 +20,7 @@ include("includes/form_handlers/events_handler.php");
 
 	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
 	$row = mysqli_fetch_array($user_data_query);
-	$address1 = $row['address_1'];
+	$address1 = ""; //$row['address_1'];
 	$address2 = $row['address_2'];
 	$city = $row['city'];
 	$state = $row['state']; 
@@ -53,25 +53,55 @@ include("includes/form_handlers/events_handler.php");
 	        var loc = new Microsoft.Maps.Location(
 	            $(".latitude").val(),
 	            $(".longitude").val());
-
+	        
+	        var pin = new Microsoft.Maps.Pushpin(loc);
+                pin.metadata = {
+                title: 'Home',
+                description: 'Discription for pin'
+            };
+            //Add a click event handler to the pushpin.
+            Microsoft.Maps.Events.addHandler(pin, 'click', pushpinClicked);
 			//alert(loc);
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
-	        alert(map.getBounds());
-	        map.entities.push(Microsoft.Maps.TestDataGenerator.getPushpins(8, map.getBounds()));
+ 
+	        //map.entities.push(Microsoft.Maps.TestDataGenerator.getPushpins(8, map.getBounds()));
+
 	        var loc = new Microsoft.Maps.Location(
-	            "38.34805",
-	            "-77.76801");
+	            "38.38842669378393",
+	            "-77.83667455078124");
+	        //Add a pushpin at the user's location.
+	        var pin = new Microsoft.Maps.Pushpin(loc);
+                pin.metadata = {
+                title: 'Pin 1',
+                description: 'Discription for pin'
+            };
+            //Add a click event handler to the pushpin.
+
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
+
 	        //Center the map on the user's location.
 	        map.setView({ center: loc, zoom: 12 });
 	    });
 
     }
 
+    function pushpinClicked(e) {
+    	alert('wtf!!!');
+        //Make sure the infobox has metadata to display.
+        if (e.target.metadata) {
+            //Set the infobox options with the metadata of the pushpin.
+            infobox.setOptions({
+                location: e.target.getLocation(),
+                title: e.target.metadata.title,
+                description: e.target.metadata.description,
+                visible: true
+            });
+        }
+    }
 
 	function selectedSuggestion(result) {
 	    //Remove previously selected suggestions from the map.
