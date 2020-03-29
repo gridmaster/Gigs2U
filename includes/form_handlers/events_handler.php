@@ -23,27 +23,71 @@ if(isset($_POST['add_event'])) {
 
 	$url = "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion='$country'&locality='$city'&postalCode='$zip'&addressLine='$address1'&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA";
 
-	$txt = "SELECT * FROM address WHERE latitude='$latitude' AND longitude='$longitude'";
-	$check_user_query = mysqli_query($con, $txt);
+	$sql = "SELECT * FROM address WHERE latitude='$latitude' AND longitude='$longitude'";
+	$check_user_query = mysqli_query($con, $sql);
 	$address_id = "";
+
+	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+	fwrite($myfile, $sql . "\n");				
+	fclose($myfile);
 
 	//   echo "<script type='text/javascript'>alert();</script>";
 
     if(mysqli_num_rows($check_user_query) == 0) {
-    		$query = mysqli_query($con, "INSERT INTO address VALUES ('', '$userLoggedInID', '2', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')");
 
-    		$new_Id = mysqli_insert_id($con);
+		$sql = "INSERT INTO address VALUES ('', '$userLoggedInID', '2', '$latitude', '$longitude', '$address1', '$address2', '$city', '$state', '$zip', '$province', '$country')";
+  		
+  		$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+		fwrite($myfile, $sql . "\n");				
+		fclose($myfile);
+
+		$query = mysqli_query($con, $sql);
+
+		$new_Id = mysqli_insert_id($con);
+
+		$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+		fwrite($myfile, $sql . "\n");
+		fclose($myfile);
+
+  		$message = 'Insert new address with id = ' . $new_Id;
+  		$sql = "INSERT INTO log (level, message) VALUES ('1', '$message')";
+  		$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+		fwrite($myfile, $message . "\n");
+		fwrite($myfile, $sql . "\n");				
+		fclose($myfile);
+		
+		$query = mysqli_query($con, $sql);
 	}
 	else {
 		// we need the address id if it exists
 		$row = mysqli_fetch_array($check_user_query);
 		$address_id = $row['addressID'];
 		//echo "<script type='text/javascript'>alert('$address_id');</script>";
+
+		$message = 'Get existing address with id = ' . $address_id;
+   		$sql = "INSERT INTO log (level, message) VALUES ('1', '$message')";
+
+	  	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+		fwrite($myfile, $message . "\n");
+		fwrite($myfile, $sql . "\n");				
+		fclose($myfile);
+
+   		$query = mysqli_query($con, $sql);
 	}
 
 	if($new_Id > -1) {
 		$address_id = $new_Id;
 	}
+
+   	$message = 'Create event with address id = ' . $address_id;
+   	$sql = "INSERT INTO log (level, message) VALUES ('1', '$message')";
+
+	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+	fwrite($myfile, $message . "\n");
+	fwrite($myfile, $sql . "\n");				
+	fclose($myfile);
+
+   	$query = mysqli_query($con, $sql);
 
 	$query = mysqli_query($con, "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$address_id', '$datetime', '$datetime')");
 }

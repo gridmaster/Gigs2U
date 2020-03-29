@@ -10,25 +10,31 @@ include("includes/form_handlers/events_handler.php");
 	$last_name = $row['last_name'];
 	$email = $row['email'];
 
-	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
+	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC");
 	$row = mysqli_fetch_array($event_query);
 
 	$address_id = $row['address_id'];
-	$title = $row['title'];
-	$start_date = $row['start_date'];
-	$description = $row['description'];
+	$title = ""; // $row['title'];
+	$start_date = NULL; //  $row['start_date'];
+	$description = NULL; //  $row['description'];
 
 	$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
 	$row = mysqli_fetch_array($user_data_query);
-	$address1 = ""; //$row['address_1'];
-	$address2 = $row['address_2'];
-	$city = $row['city'];
-	$state = $row['state']; 
-	$zip = $row['zip'];
-	$country = $row['country'];
-	$province = $row['province'];
-	$longitude = $row['longitude'];
-	$latitude = $row['latitude'];
+	$address1 = NULL; // $row['address_1'];
+	$address2 = NULL; // $row['address_2'];
+	$city = NULL; // $row['city'];
+	$state = NULL; // $row['state']; 
+	$zip = NULL; // $row['zip'];
+	$country = NULL; // $row['country'];
+	$province = NULL; // $row['province'];
+	$longitude = NULL; // $row['longitude'];
+	$latitude = NULL; // $row['latitude'];
+
+	if( strcmp($address1,"") != 0) {
+		$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
+	}
+	else
+		$search = "";
 
 	$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
 
@@ -120,7 +126,7 @@ include("includes/form_handlers/events_handler.php");
 
 		var latitude = latlong.latitude;
 		var longitude = latlong.longitude;
-
+		
 		$(".address1").val(addr.addressLine);
 		$(".city").val(addr.locality);
 		$(".state").val(addr.adminDistrict);
@@ -129,6 +135,7 @@ include("includes/form_handlers/events_handler.php");
 		$(".province").val(addr.countryRegionIS02);
 		$(".latitude").val(latitude);
 		$(".longitude").val(longitude);
+		
     }
 </script>
 
@@ -147,7 +154,7 @@ include("includes/form_handlers/events_handler.php");
 		<div class="trends">
 			<?php 
 
-    		$query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
+    		$query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
 
 			foreach ($query as $row) {
 				
@@ -193,21 +200,30 @@ include("includes/form_handlers/events_handler.php");
 			<div class="map_details column">
 
 				<?php
-				$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
+				$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
 
 				$row = mysqli_fetch_array($event_query);
 
 				$longitude = $row['longitude'];
 				$latitude = $row['latitude'];
 
-				$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
+				if( strcmp($address1,"") != 0) {
+					$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
+				}
+				else
+					$search = "";
 				?>
 
 				<input type="hidden" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input">
 				<input type="hidden" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input">
+<!--
+				<?php
+					$longitude = NULL;
+					$latitude = NULL;
+				?>
 
 			    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AiVQbCkM8eRh2z_3qh1bDTvovfpXfqWxRlII4j4UIRgvO6Q2B3GSQGHRu7UhjheA' async defer></script>
-
+-->
 				<div id='searchBoxContainer'>
     				<label for='searchBox'>Dynamic address search:</label>
 
@@ -226,58 +242,42 @@ include("includes/form_handlers/events_handler.php");
       <div class="column column-flex col-2" style="min-width: 340px; max-width: 340px">
 		<div class="col-1-cont" style="margin: 0 auto; width: 300px;">
 
-<!--		<?php
-		$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
-		$row = mysqli_fetch_array($event_query);
+			<h4 style="text-align: center;">What's going on???</h4>
+			<h4 style="text-align: center;">Enter an event here!</h4>
+			<hr>
 
-		$address_id = $row['address_id'];
-		$title = $row['title'];
-		$start_date = $row['start_date'];
-		$description = $row['description'];
+			<form action="events.php" method="POST">
+				Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
+				Date of event: <input id="datetime" name="datetime" value="<?php echo $start_date; ?>" >
+				<br>
+				<br>
 
-		$user_data_query = mysqli_query($con, "SELECT * FROM address WHERE addressID='$address_id'");
-		$row = mysqli_fetch_array($user_data_query);
-		$address1 = $row['address_1'];
-		$address2 = $row['address_2'];
-		$city = $row['city'];
-		$state = $row['state'];
-		$zip = $row['zip'];
-		$country = $row['country'];
-		$province = $row['province'];
-		$longitude = $row['longitude'];
-		$latitude = $row['latitude'];
+				Description: <textarea name="description" style="width: 280px; height: 60px;"><?php echo $description; ?></textarea><br><br>
+		        <p></p>
 
-		$search = $address1 . " " . $city . ", " . $state . " " . $zip . " " . $country;
-		?>
---> 
-		<h4 style="text-align: center;">What's going on???</h4>
-		<h4 style="text-align: center;">Enter an event here!</h4>
-		<hr>
+		        <div id='searchBoxContainer'>
+    				<label for='searchBox'>Dynamic address search:</label>
 
-	<form action="events.php" method="POST">
-		Title of event: <input type="text" name="title" value="<?php echo $title; ?>" id="settings_input"><br>
-		Date of event: <input id="datetime" name="datetime" value="<?php echo $start_date; ?>" >
-		<br>
-		<br>
+        			<input type='text' id='searchBox' style="width: 100%;" value="<?php echo $search; ?>">
+        			<p></p>
+    			</div>
 
-		Description: <textarea name="description" style="width: 280px; height: 60px;"><?php echo $description; ?></textarea><br><br>
-        <p></p>
-		Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
-		Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
-		City: <input type="text" class="city" name="city" value="<?php echo $city; ?>" id="settings_input"><br>
-		State: <input type="text" class="state" name="state" value="<?php echo $state; ?>" id="settings_input"><br>
-		Zip: <input type="text" class="zip" name="zip" value="<?php echo $zip; ?>" id="settings_input"><br>
-		Country: <input type="text" class="country" name="country" value="<?php echo $country; ?>" id="settings_input"><br>
-		Province: <input type="text" class="province" name="province" value="<?php echo $province; ?>" id="settings_input"><br>
+				Address 1: <input type="text" class="address1" name="address1" value="<?php echo $address1; ?>" id="settings_input"><br>
+				Address 2: <input type="text" class="address2" name="address2" value="<?php echo $address2; ?>" id="settings_input"><br>
+				City: <input type="text" class="city" name="city" value="<?php echo $city; ?>" id="settings_input"><br>
+				State: <input type="text" class="state" name="state" value="<?php echo $state; ?>" id="settings_input"><br>
+				Zip: <input type="text" class="zip" name="zip" value="<?php echo $zip; ?>" id="settings_input"><br>
+				Country: <input type="text" class="country" name="country" value="<?php echo $country; ?>" id="settings_input"><br>
+				Province: <input type="text" class="province" name="province" value="<?php echo $province; ?>" id="settings_input"><br>
 
-		Longitude: <input type="text" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input"><br>
-		Latitude: <input type="text" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input"><br>
-		<?php echo $message; ?>
+				Longitude: <input type="text" class="longitude" name="longitude" value="<?php echo $longitude; ?>" id="settings_input"><br>
+				Latitude: <input type="text" class="latitude" name="latitude" value="<?php echo $latitude; ?>" id="settings_input"><br>
+				<?php echo $message; ?>
 
-		<input type="submit" name="add_event" value="Add event" class="info settings_submit">
-	</form>
-</div>
-</div>
+				<input type="submit" name="add_event" value="Add event" class="info settings_submit">
+			</form>
+		</div>
+	</div>
 
 <!--***************************      Column 4     *************************-->
 <!--<div class="column column-flex col-2" style="min-width: 440px;">
