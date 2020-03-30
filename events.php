@@ -11,6 +11,7 @@ include("includes/form_handlers/events_handler.php");
 	$email = $row['email'];
 
 	$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC");
+
 	$row = mysqli_fetch_array($event_query);
 
 	$address_id = $row['address_id'];
@@ -47,7 +48,18 @@ include("includes/form_handlers/events_handler.php");
 	var map;
 
     function GetMap() {
+
+		var infoboxLayer = new Microsoft.Maps.EntityCollection();
+		var pinLayer = new Microsoft.Maps.EntityCollection();
+
+		// Create the info box for the pushpin
+		pinInfobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0), { visible: false });
+		infoboxLayer.push(pinInfobox);
+
         map = new Microsoft.Maps.Map('#myMap', {});
+
+		map.entities.push(pinLayer);
+		map.entities.push(infoboxLayer)
 
         Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function () {
             var manager = new Microsoft.Maps.AutosuggestManager({ map: map });
@@ -74,20 +86,38 @@ include("includes/form_handlers/events_handler.php");
  
 	        //map.entities.push(Microsoft.Maps.TestDataGenerator.getPushpins(8, map.getBounds()));
 
+	        <?php
+				$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude, address_1 FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC");
+				
+				$row = mysqli_fetch_array($event_query);
+
+				$address_id = $row['address_id'];
+				$address_1 = $row['address_1'];
+				$title = $row['title'];
+
+				$longitude = $row['longitude'];
+				$latitude = $row['latitude'];
+			?>
+
+			var lon = <?php echo $longitude ?>;
+			var lat = <?php echo $latitude ?>;
+			
 	        var loc = new Microsoft.Maps.Location(
-	            "38.38842669378393",
-	            "-77.83667455078124");
-	        //Add a pushpin at the user's location.
-	        var pin = new Microsoft.Maps.Pushpin(loc);
-                pin.metadata = {
-                title: 'Pin 1',
-                description: 'Discription for pin'
-            };
-            //Add a click event handler to the pushpin.
+	            parseFloat(lat),
+	            parseFloat(lon)
+	            );
 
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
+
+            pin.Title = <?php echo json_encode($title) ?>;
+            pin.Description = <?php echo json_encode($address_1) ?>;
+
+	        //Add a pushpin at the user's location.
 	        map.entities.push(pin);
+
+            //Add a click event handler to the pushpin.
+			Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
 
 	        //Center the map on the user's location.
 	        map.setView({ center: loc, zoom: 12 });
@@ -95,8 +125,17 @@ include("includes/form_handlers/events_handler.php");
 
     }
 
+	function displayInfobox(e) {
+		console.log(e.target);
+		pinInfobox.setOptions({ title: e.target.Title, description: e.target.Description, visible: true, offset: new Microsoft.Maps.Point(0, 25) });
+		pinInfobox.setLocation(e.target.getLocation());
+	}
+
+	function hideInfobox(e) {
+		pinInfobox.setOptions({ visible: false });
+	}
+
     function pushpinClicked(e) {
-    	alert('wtf!!!');
         //Make sure the infobox has metadata to display.
         if (e.target.metadata) {
             //Set the infobox options with the metadata of the pushpin.
@@ -200,7 +239,7 @@ include("includes/form_handlers/events_handler.php");
 			<div class="map_details column">
 
 				<?php
-				$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 10");
+				$event_query = mysqli_query($con, "SELECT * FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND at.default_address = 1 AND start_date > CURDATE() ORDER BY start_date ASC LIMIT 1");
 
 				$row = mysqli_fetch_array($event_query);
 
