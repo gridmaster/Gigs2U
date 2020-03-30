@@ -68,7 +68,7 @@ include("includes/form_handlers/events_handler.php");
 
 	    //Request the user's location
 	    navigator.geolocation.getCurrentPosition(function (position) {
-	        var loc = new Microsoft.Maps.Location(
+/*	        var loc = new Microsoft.Maps.Location(
 	            $(".latitude").val(),
 	            $(".longitude").val());
 	        
@@ -83,20 +83,37 @@ include("includes/form_handlers/events_handler.php");
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 	        map.entities.push(pin);
- 
+ */
 	        //map.entities.push(Microsoft.Maps.TestDataGenerator.getPushpins(8, map.getBounds()));
 
 	        <?php
-				$event_query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude, address_1 FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC");
+
+	        	$events = array();
+	        	$i = 0;
+				$query = mysqli_query($con, "SELECT id, title, description, posted_by_id, address_id, start_date, end_date, latitude, longitude, address_1 FROM events e JOIN address a ON e.address_id = a.addressID JOIN address_type at on a.address_type = at.address_type_ID WHERE memberID='$userLoggedInID' AND a.zip = (SELECT zip FROM address WHERE addressID = 1) AND start_date > CURDATE() ORDER BY start_date ASC");
 				
-				$row = mysqli_fetch_array($event_query);
+				foreach ($query as $row) {
+					$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+					fwrite($myfile, $row['title'] . "\n");
+					fwrite($myfile, $i . "\n");			
+					fclose($myfile);
 
-				$address_id = $row['address_id'];
-				$address_1 = $row['address_1'];
-				$title = $row['title'];
+					$longitude = $row['longitude'];
+					$latitude = $row['latitude'];
 
-				$longitude = $row['longitude'];
-				$latitude = $row['latitude'];
+					$address_id = $row['address_id'];
+					$address_1 = $row['address_1'];
+					$title = $row['title'];
+					$description = $row['description'];
+
+					array_push($events, $address_1 . 
+								  '~' . $title . 
+								  '~' . $description .
+								  '~' . $latitude . 
+								  '~' . $longitude);
+					$i=$i+1;
+				}
+
 			?>
 
 			var lon = <?php echo $longitude ?>;
@@ -105,8 +122,32 @@ include("includes/form_handlers/events_handler.php");
 	        var loc = new Microsoft.Maps.Location(
 	            parseFloat(lat),
 	            parseFloat(lon)
-	            );
+	        );
 
+            var jArray = <?php echo json_encode($events); ?>;
+
+   			for(var i=0; i<jArray.length; i++) {
+    			//alert(jArray[i]);
+    			var arf = jArray[i].split('~');
+    			//alert(arf[0]);
+    	        var loc = new Microsoft.Maps.Location(
+            		parseFloat(arf[3]),
+            		parseFloat(arf[4])
+        		);
+        		var pin = new Microsoft.Maps.Pushpin(loc);
+
+	            pin.Title = arf[1];
+	            pin.Description = arf[2];
+
+		        //Add a pushpin at the user's location.
+		        map.entities.push(pin);
+
+	            //Add a click event handler to the pushpin.
+				Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
+    		}
+/*
+	        console.log(<?php echo json_encode($events[0]) ?>);
+			console.log(<?php echo json_encode($events[1]) ?>);
 	        //Add a pushpin at the user's location.
 	        var pin = new Microsoft.Maps.Pushpin(loc);
 
@@ -118,7 +159,7 @@ include("includes/form_handlers/events_handler.php");
 
             //Add a click event handler to the pushpin.
 			Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
-
+*/
 	        //Center the map on the user's location.
 	        map.setView({ center: loc, zoom: 12 });
 	    });

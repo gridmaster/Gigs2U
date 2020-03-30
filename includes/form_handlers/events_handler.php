@@ -89,7 +89,13 @@ if(isset($_POST['add_event'])) {
 
    	$query = mysqli_query($con, $sql);
 
-	$query = mysqli_query($con, "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$address_id', '$datetime', '$datetime')");
+   	$sql = "INSERT INTO events VALUES ('', '$title', '$description', '$userLoggedInID', '$address_id', '$datetime', '$datetime')";
+	$query = mysqli_query($con, $sql);
+
+	$myfile = fopen("logs/logfile.log", "a") or die("Unable to open file!");
+	fwrite($myfile, $sql . "\n");				
+	fclose($myfile);
+	header("Location: events.php");
 }
 else {
 	$message = "";
